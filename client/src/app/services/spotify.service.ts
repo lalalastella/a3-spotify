@@ -23,7 +23,24 @@ export class SpotifyService {
     //You shouldn't need to update this part.
     // The Canvas dummy server needs ordinary requests; credentials are enabled
     // only after the included OAuth server creates a per-browser session.
-    return firstValueFrom(this.http.get(uri, {withCredentials: this.authState.sessionMode}));
+    if(!this.authState.sessionMode) {
+      return firstValueFrom(this.http.get(uri));
+    }
+
+    return firstValueFrom(this.http.get(uri, {withCredentials: true})).catch((error) => {
+      // A saved OAuth state can outlive the real server. The course dummy
+      // server uses Access-Control-Allow-Origin: * and therefore rejects a
+      // credentialed CORS request. Retry once as the rubric's anonymous flow;
+      // if that succeeds, remove the stale real-server login indicator.
+      if(error?.status !== 0) {
+        throw error;
+      }
+
+      return firstValueFrom(this.http.get(uri)).then((data) => {
+        this.authState.clear();
+        return data;
+      });
+    });
   }
 
   aboutMe():Promise<ProfileData> {
