@@ -13,9 +13,9 @@
 	<div class="profile-actions">
 		@if(loginRequired) {
 			<a class="btn btn-light" href="http://127.0.0.1:8888/login">Log in to Spotify</a>
-		} @else {
+		} @else if(!name) {
 			<button class="btn btn-light" (click)="loadProfile()" [disabled]="isLoading">
-				@if(isLoading) { Loading profile… } @else if(name) { Reload profile } @else { Load info about me }
+				@if(isLoading) { Loading profile… } @else { Load info about me }
 			</button>
 		}
 		@if(profile_link) {

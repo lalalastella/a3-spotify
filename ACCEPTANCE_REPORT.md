@@ -39,7 +39,7 @@ included, though the assignment caps bonus credit at one point.
 
 Final re-validation on November 7, 2026:
 
-- Production build hash `3dfc2f98c670f1bc`: PASS with no warnings.
+- Production build hash `c96ed36d40089649`: PASS with no warnings.
 - Profile, artist/album/track search, Artist page, Album page, and Track page: PASS.
 - Internal route targets and Album hidden-column behavior: PASS.
 - Browser console error count: 0.
