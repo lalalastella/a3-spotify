@@ -1,5 +1,6 @@
 --Readme document for Stella Jiang (yuxuj10@uci.edu, student ID: 83089982)--
 --Canvas group: A3 Pair 47--
+--Project: TuneCrate — INF133 Spotify Browser--
 
 1. How many assignment points do you believe you completed?
 
