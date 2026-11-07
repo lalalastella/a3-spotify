@@ -70,33 +70,56 @@
 .account-controls {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.6rem;
+	gap: 0.35rem;
 	min-height: 42px;
 	margin-left: 0.65rem;
-	padding: 0.25rem 0.35rem 0.25rem 0.25rem;
-	border: 1px solid rgba(30, 215, 96, 0.36);
+	padding: 0.25rem;
+	border: 1px solid rgba(255, 255, 255, 0.1);
 	border-radius: 999px;
-	background: rgba(30, 215, 96, 0.08);
+	background: rgba(29, 37, 43, 0.82);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .nav-avatar {
-	width: 34px;
-	height: 34px;
+	width: 32px;
+	height: 32px;
 	border-radius: 50%;
 	object-fit: cover;
-	box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.4);
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.16);
+	background: #e7ebed;
+}
+
+.nav-avatar.is-placeholder {
+	opacity: 0.82;
 }
 
 .logout-link {
-	padding: 0.35rem 0.55rem 0.35rem 0;
-	color: var(--app-text);
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	min-height: 34px;
+	padding: 0.35rem 0.65rem;
+	border-radius: 999px;
+	color: var(--app-muted);
 	font-size: 0.78rem;
-	font-weight: 800;
+	font-weight: 700;
 	text-decoration: none;
+	transition: color 160ms ease, background-color 160ms ease;
 }
 
 .logout-link:hover {
-	color: var(--app-accent-hover);
+	background: rgba(255, 255, 255, 0.08);
+	color: var(--app-text);
+}
+
+.logout-icon {
+	width: 15px;
+	height: 15px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.8;
+	stroke-linecap: round;
+	stroke-linejoin: round;
 }
 
 .nav-actions {
@@ -130,7 +153,11 @@
 		margin-left: 0;
 	}
 
-	.logout-link {
+	.logout-label {
 		display: none;
+	}
+
+	.logout-link {
+		padding-inline: 0.55rem;
 	}
 }
