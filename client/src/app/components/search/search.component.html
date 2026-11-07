@@ -1,0 +1,14 @@
+<h1>Search Spotify</h1>
+<input [(ngModel)]="searchString" (keyup.enter)="search()" aria-label="Search Spotify">
+<select [(ngModel)]="searchCategory" (ngModelChange)="resources = null" aria-label="Search category">
+	@for(category of searchCategories; track category) {
+		<option [value]="category">{{ category }}</option>
+	}
+</select>
+<button class="btn btn-light" (click)="search()">Search</button>
+@if(resources && searchCategory !== 'track') {
+	<app-carousel [resources]="resources" carouselId="searchCarousel"></app-carousel>
+}
+@if(resources && searchCategory === 'track') {
+	<app-track-list [tracks]="tracks"></app-track-list>
+}

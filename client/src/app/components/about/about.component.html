@@ -1,0 +1,6 @@
+<button class="btn btn-light" (click)="loadProfile()">Load info about me</button>
+<h3>Logged in user: {{ name || 'Unknown' }}</h3>
+<img [src]="profile_pic" class="profile" alt="Spotify profile picture">
+<p>
+	<a class="btn btn-light" [href]="profile_link" target="_blank" rel="noopener noreferrer">Open profile on Spotify</a>
+</p>
