@@ -9,7 +9,6 @@
 			<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
 		</div>
 		<div class="col-xl-4 col-12">
-			<h3>Popularity</h3>
 			<p>{{ artist.followersStr }} followers</p>
 			@if(artist.popularity) { <app-thermometer [popularity]="artist.popularity"></app-thermometer> }
 			<h3>{{ artist.name }}'s Albums</h3>

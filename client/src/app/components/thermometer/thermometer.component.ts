@@ -16,4 +16,13 @@ export class ThermometerComponent implements OnInit {
   ngOnInit() {
   }
 
+  get popularityLabel():string {
+    const score = this.popularity?.percent * 100;
+
+    if (score >= 85) return 'Peak';
+    if (score >= 65) return 'Strong';
+    if (score >= 40) return 'Rising';
+    return 'Low';
+  }
+
 }
