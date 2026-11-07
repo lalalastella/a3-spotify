@@ -95,6 +95,22 @@ button:active,
 	padding: 0.65rem 1.2rem;
 }
 
+.btn-favorite {
+	--bs-btn-color: var(--app-text);
+	--bs-btn-bg: transparent;
+	--bs-btn-border-color: #67737b;
+	--bs-btn-hover-color: #07110b;
+	--bs-btn-hover-bg: var(--app-accent-hover);
+	--bs-btn-hover-border-color: var(--app-accent-hover);
+	padding: 0.65rem 1.15rem;
+}
+
+.btn-favorite.is-saved {
+	--bs-btn-color: #07110b;
+	--bs-btn-bg: var(--app-accent);
+	--bs-btn-border-color: var(--app-accent);
+}
+
 .eyebrow {
 	margin: 0 0 0.5rem;
 	color: var(--app-accent);

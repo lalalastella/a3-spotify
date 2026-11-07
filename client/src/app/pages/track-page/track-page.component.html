@@ -18,6 +18,7 @@
 			<p>
 				<a class="btn btn-light" role="button" [href]="track.url" target="_blank" rel="noopener noreferrer">Open {{ track.name }} on Spotify</a>
 			</p>
+			<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
 		</div>
 		<div class="col-sm-6 col-12">
 			<h3>Popularity</h3>

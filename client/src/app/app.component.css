@@ -48,6 +48,23 @@
 	margin-left: 1rem;
 }
 
+.nav-actions {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+}
+
+.favorites-nav {
+	padding: 0.65rem 0.85rem;
+	color: var(--app-text);
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.favorites-nav:hover {
+	color: var(--app-accent-hover);
+}
+
 .app-shell {
 	max-width: 1440px;
 	padding: clamp(1.25rem, 4vw, 3.5rem);

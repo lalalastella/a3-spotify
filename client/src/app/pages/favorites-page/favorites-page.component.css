@@ -1,0 +1,145 @@
+.library {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.library-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.library-header h1 {
+  margin-bottom: 0.65rem;
+}
+
+.library-header p:last-child {
+  max-width: 56ch;
+  margin: 0;
+  color: var(--app-muted);
+}
+
+.crate-count {
+  display: grid;
+  place-items: center;
+  flex: 0 0 108px;
+  min-height: 108px;
+  border: 1px solid rgba(30, 215, 96, 0.42);
+  border-radius: 50%;
+  background: rgba(30, 215, 96, 0.08);
+}
+
+.crate-count strong {
+  align-self: end;
+  font-size: 2.15rem;
+  line-height: 1;
+}
+
+.crate-count span {
+  align-self: start;
+  color: var(--app-muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.empty-library {
+  display: grid;
+  justify-items: start;
+  max-width: 620px;
+}
+
+.empty-note {
+  margin-bottom: 1rem;
+  color: var(--app-accent);
+  font-size: 3rem;
+}
+
+.empty-library p {
+  max-width: 50ch;
+  color: var(--app-muted);
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.favorite-card {
+  overflow: hidden;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  background: var(--app-surface);
+  transition: transform 180ms ease, border-color 180ms ease;
+}
+
+.favorite-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(30, 215, 96, 0.5);
+}
+
+.favorite-cover {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.favorite-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.favorite-details {
+  padding: 1rem;
+}
+
+.favorite-details p {
+  margin: 0 0 0.35rem;
+  color: var(--app-accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.favorite-details h2 {
+  min-height: 2.5em;
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+}
+
+.favorite-details h2 a {
+  color: var(--app-text);
+  text-decoration: none;
+}
+
+.remove-favorite {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--app-muted);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.remove-favorite:hover {
+  color: var(--app-text);
+}
+
+@media (max-width: 560px) {
+  .library-header {
+    align-items: flex-start;
+  }
+
+  .crate-count {
+    flex-basis: 82px;
+    min-height: 82px;
+  }
+}

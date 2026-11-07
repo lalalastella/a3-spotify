@@ -3,7 +3,10 @@
     <span class="brand-signal" aria-hidden="true"><i></i><i></i><i></i></span>
     <span>Browsing Spotify</span>
   </a>
-  <a class="btn btn-light login-button" href="http://127.0.0.1:8888/login">Log in</a>
+  <div class="nav-actions">
+    <a class="favorites-nav" routerLink="/favorites">Favorites</a>
+    <a class="btn btn-light login-button" href="http://127.0.0.1:8888/login">Log in</a>
+  </div>
 </nav>
 <main class="container-fluid app-shell">
   <router-outlet></router-outlet>

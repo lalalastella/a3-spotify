@@ -1,0 +1,37 @@
+<section class="library" aria-labelledby="favorites-heading">
+  <header class="library-header">
+    <div>
+      <p class="eyebrow">Bonus feature · saved locally</p>
+      <h1 id="favorites-heading">Your music crate</h1>
+      <p>Keep artists, albums, and tracks together for your next listening session.</p>
+    </div>
+    <div class="crate-count" aria-label="Number of saved items">
+      <strong>{{ favorites.length }}</strong>
+      <span>saved</span>
+    </div>
+  </header>
+
+  @if(favorites.length === 0) {
+    <div class="empty-library panel">
+      <span class="empty-note" aria-hidden="true">♪</span>
+      <h2>Your crate is empty</h2>
+      <p>Search the catalog, open an artist, album, or track, then choose “Save to favorites.”</p>
+      <a class="btn btn-light" routerLink="/">Search Spotify</a>
+    </div>
+  } @else {
+    <div class="favorites-grid">
+      @for(item of favorites; track item.category + item.id) {
+        <article class="favorite-card">
+          <a class="favorite-cover" [routerLink]="['/', item.category, item.id]">
+            <img [src]="item.imageURL" [alt]="item.name" loading="lazy">
+          </a>
+          <div class="favorite-details">
+            <p>{{ item.category }}</p>
+            <h2><a [routerLink]="['/', item.category, item.id]">{{ item.name }}</a></h2>
+            <button type="button" class="remove-favorite" (click)="remove(item)" [attr.aria-label]="'Remove ' + item.name + ' from favorites'">Remove</button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>

@@ -31,8 +31,11 @@ partner survey will accurately report the work distribution.
 
 5. Did you add a bonus feature to your submission? If so, what is it and how should we see it?
 
-No bonus feature was added. We prioritized completing and testing all required
-rubric items.
+Yes. The Local Favorites Library lets users save artists, albums, and tracks
+without requiring Spotify Premium or a live Spotify account. Open any artist,
+album, or track detail page and click "Save to favorites," then use the
+"Favorites" link in the navigation bar to view or remove saved resources. The
+collection persists in that browser using localStorage.
 
 6. Is there anything special we need to know in order to run your code?
 
