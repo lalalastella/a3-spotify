@@ -1,7 +1,7 @@
 <section class="panel profile-panel" aria-labelledby="profile-heading">
 	<p class="eyebrow">Your listening identity</p>
 	<h1 id="profile-heading">Spotify profile</h1>
-	<img [src]="profile_pic" class="profile" alt="Spotify profile picture">
+	<img [src]="profile_pic" class="profile" [alt]="name ? name + ' Spotify profile picture' : 'Default profile picture'">
 	<h3>Logged in user: {{ name || 'Unknown' }}</h3>
 	<div class="profile-actions">
 		<button class="btn btn-light" (click)="loadProfile()">Load info about me</button>

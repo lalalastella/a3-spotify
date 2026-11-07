@@ -9,7 +9,7 @@ import { SpotifyService } from '../../services/spotify.service';
 })
 export class AboutComponent implements OnInit {
   name:string = null;
-  profile_pic:string = "assets/unknown.jpg";
+  profile_pic:string = "assets/default-profile.svg";
   profile_link:string = null;
 
 
