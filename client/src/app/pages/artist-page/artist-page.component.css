@@ -1,7 +1,12 @@
 #artistImg {
-	max-width: 400%;
+	display: block;
+	width: min(100%, 400px);
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: var(--app-radius);
+	box-shadow: var(--app-shadow);
 }
 
-app-artist {
-	vertical-align: middle;
+.row {
+	row-gap: 2rem;
 }

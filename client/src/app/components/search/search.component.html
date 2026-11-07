@@ -1,14 +1,28 @@
-<h1>Search Spotify</h1>
-<input [(ngModel)]="searchString" (keyup.enter)="search()" aria-label="Search Spotify">
-<select [(ngModel)]="searchCategory" (ngModelChange)="resources = null" aria-label="Search category">
-	@for(category of searchCategories; track category) {
-		<option [value]="category">{{ category }}</option>
-	}
-</select>
-<button class="btn btn-light" (click)="search()">Search</button>
-@if(resources && searchCategory !== 'track') {
-	<app-carousel [resources]="resources" carouselId="searchCarousel"></app-carousel>
-}
-@if(resources && searchCategory === 'track') {
-	<app-track-list [tracks]="tracks"></app-track-list>
-}
+<section class="panel search-panel" aria-labelledby="search-heading">
+	<p class="eyebrow">Artists, albums & tracks</p>
+	<h1 id="search-heading">Search Spotify</h1>
+	<p class="search-intro">Choose what you want to find, then explore the matching catalog.</p>
+	<form class="search-form" (ngSubmit)="search()">
+		<label for="spotify-search">Search term</label>
+		<div class="search-controls">
+			<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder="Try an artist or song" autocomplete="off">
+			<select id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null" aria-label="Search category">
+				@for(category of searchCategories; track category) {
+					<option [value]="category">{{ category }}</option>
+				}
+			</select>
+			<button type="submit" class="btn btn-light">Search</button>
+		</div>
+	</form>
+	<div class="results" aria-live="polite">
+		@if(resources && resources.length === 0) {
+			<p class="empty-state">No results yet. Try a different search term.</p>
+		}
+		@if(resources && resources.length > 0 && searchCategory !== 'track') {
+			<app-carousel [resources]="resources" carouselId="searchCarousel"></app-carousel>
+		}
+		@if(resources && resources.length > 0 && searchCategory === 'track') {
+			<app-track-list [tracks]="tracks"></app-track-list>
+		}
+	</div>
+</section>

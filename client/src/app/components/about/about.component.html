@@ -1,6 +1,10 @@
-<button class="btn btn-light" (click)="loadProfile()">Load info about me</button>
-<h3>Logged in user: {{ name || 'Unknown' }}</h3>
-<img [src]="profile_pic" class="profile" alt="Spotify profile picture">
-<p>
-	<a class="btn btn-light" [href]="profile_link" target="_blank" rel="noopener noreferrer">Open profile on Spotify</a>
-</p>
+<section class="panel profile-panel" aria-labelledby="profile-heading">
+	<p class="eyebrow">Your listening identity</p>
+	<h1 id="profile-heading">Spotify profile</h1>
+	<img [src]="profile_pic" class="profile" alt="Spotify profile picture">
+	<h3>Logged in user: {{ name || 'Unknown' }}</h3>
+	<div class="profile-actions">
+		<button class="btn btn-light" (click)="loadProfile()">Load info about me</button>
+		<a class="profile-link" [href]="profile_link" target="_blank" rel="noopener noreferrer">Open profile on Spotify <span aria-hidden="true">↗</span></a>
+	</div>
+</section>

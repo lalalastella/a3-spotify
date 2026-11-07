@@ -1,4 +1,8 @@
 .progress {
-	margin: 10px;
+	margin: 1rem 0;
 	height: 20px;
+}
+
+.row > div {
+	padding: clamp(1rem, 3vw, 2rem);
 }

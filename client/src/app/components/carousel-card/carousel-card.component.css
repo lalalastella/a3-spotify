@@ -1,0 +1,25 @@
+a {
+	display: block;
+	position: relative;
+	min-height: 280px;
+	color: white;
+}
+
+img {
+	aspect-ratio: 1;
+	object-fit: cover;
+}
+
+.carousel-caption {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 3rem 1.25rem 1.2rem;
+	background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
+	text-align: left;
+}
+
+.carousel-caption h5 {
+	margin: 0;
+	font-weight: 900;
+}

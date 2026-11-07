@@ -1,3 +1,54 @@
-nav {
-	margin-bottom: 20px;
+.app-navbar {
+	display: flex;
+	justify-content: space-between;
+	padding: 0.85rem clamp(1rem, 4vw, 3.5rem);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(11, 15, 18, 0.86);
+	backdrop-filter: blur(18px);
+}
+
+.app-brand {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin: 0;
+	color: var(--app-text);
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	font-weight: 900;
+	letter-spacing: -0.02em;
+}
+
+.app-brand:hover {
+	color: var(--app-text);
+}
+
+.brand-signal {
+	display: inline-flex;
+	align-items: flex-end;
+	gap: 3px;
+	width: 26px;
+	height: 26px;
+	padding: 5px;
+	border-radius: 50%;
+	background: var(--app-accent);
+}
+
+.brand-signal i {
+	display: block;
+	width: 3px;
+	border-radius: 2px;
+	background: #07110b;
+}
+
+.brand-signal i:nth-child(1) { height: 7px; }
+.brand-signal i:nth-child(2) { height: 15px; }
+.brand-signal i:nth-child(3) { height: 11px; }
+
+.login-button {
+	margin-left: 1rem;
+}
+
+.app-shell {
+	max-width: 1440px;
+	padding: clamp(1.25rem, 4vw, 3.5rem);
 }
