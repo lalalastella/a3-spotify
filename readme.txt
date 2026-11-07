@@ -32,6 +32,7 @@ and the following documentation:
 - https://getbootstrap.com/docs/5.3/components/carousel/
 - https://getbootstrap.com/docs/5.3/components/progress/
 - https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+- https://open.spotify.com/album/6T3WdeRv9rqMIlmnloB2Dv
 - https://github.com/expressjs/session
 
 OpenAI Codex was used for planning, implementation assistance, debugging,
@@ -58,6 +59,12 @@ to view or remove saved resources. Favorites persist in that browser using
 localStorage.
 
 6. Is there anything special we need to know in order to run your code?
+
+IMPORTANT — choose exactly one server mode for port 8888. The same submitted
+Angular client supports both modes, but the two servers cannot run at the same
+time. The Canvas dummy server is the required grading path and does not use
+Spotify login. The included `webserver` is the optional bonus path and requires
+Spotify OAuth login before profile and search requests can use real data.
 
 Required 10-point grading path (Canvas dummy_webserver):
 
