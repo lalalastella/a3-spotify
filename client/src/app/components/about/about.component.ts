@@ -42,11 +42,14 @@ export class AboutComponent implements OnInit {
         this.authState.setProfile({ name: profile.name, imageURL: profile.imageURL });
       }
       this.isLoading = false;
-    }).catch(() => {
+    }).catch((error) => {
+      const authenticationRequired = error && error.status === 401;
       this.authState.clear();
-      this.loginRequired = wasUsingSpotifySession;
-      this.errorMessage = wasUsingSpotifySession
-        ? 'Your Spotify session has expired. Log in again to reconnect.'
+      this.loginRequired = authenticationRequired || wasUsingSpotifySession;
+      this.errorMessage = this.loginRequired
+        ? (wasUsingSpotifySession
+          ? 'Your Spotify session has expired. Log in again to reconnect.'
+          : 'Log in to Spotify to load your real profile.')
         : 'Profile could not be loaded. Start the course server and try again.';
       this.isLoading = false;
     });
