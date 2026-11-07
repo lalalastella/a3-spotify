@@ -1,6 +1,7 @@
 .album-layout {
 	display: grid;
 	grid-template-areas:
+		"back back"
 		"title tracks"
 		"image tracks"
 		"stats tracks"
@@ -10,6 +11,10 @@
 	column-gap: clamp(2rem, 5vw, 4rem);
 	row-gap: 1rem;
 	align-items: start;
+}
+
+.back-link {
+	grid-area: back;
 }
 
 .album-title {
@@ -60,6 +65,7 @@
 @media (max-width: 850px) {
 	.album-layout {
 		grid-template-areas:
+			"back"
 			"title"
 			"stats"
 			"image"

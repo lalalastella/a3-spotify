@@ -1,6 +1,7 @@
 .artist-layout {
 	display: grid;
 	grid-template-areas:
+		"back back back"
 		"title stats tracks"
 		"image albums tracks"
 		"actions albums tracks";
@@ -8,6 +9,10 @@
 	column-gap: clamp(1.5rem, 3vw, 2.5rem);
 	row-gap: 1.25rem;
 	align-items: start;
+}
+
+.back-link {
+	grid-area: back;
 }
 
 .artist-title {
@@ -61,6 +66,7 @@
 @media (max-width: 1100px) {
 	.artist-layout {
 		grid-template-areas:
+			"back back"
 			"title stats"
 			"image albums"
 			"actions albums"
@@ -72,6 +78,7 @@
 @media (max-width: 700px) {
 	.artist-layout {
 		grid-template-areas:
+			"back"
 			"title"
 			"stats"
 			"image"

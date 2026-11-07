@@ -56,6 +56,22 @@ a:hover {
 	color: var(--app-focus);
 }
 
+.back-link {
+	display: inline-flex;
+	width: fit-content;
+	align-items: center;
+	color: var(--app-muted);
+	font-size: 0.86rem;
+	font-weight: 700;
+	text-decoration: none;
+	transition: color 160ms ease, transform 160ms ease;
+}
+
+.back-link:hover {
+	color: var(--app-text);
+	transform: translateX(-2px);
+}
+
 button,
 .btn,
 input,
