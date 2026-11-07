@@ -1,34 +1,48 @@
 --Readme document for Stella Jiang (yuxuj10@uci.edu, student ID: 83089982)--
+--Partner: none; Stella Jiang is the sole implementation author--
 --Canvas group: A3 Pair 47--
 --Project: TuneCrate — INF133 Spotify Browser--
 
 1. How many assignment points do you believe you completed?
 
-10/10
+11/10 (10 required points + 1 official extra-credit point)
 - 1/1 Communicating with the webserver
 - 1/1 Populating information about the user
 - 3/3 Populating the search component
 - 3/3 Artist page
 - 1.5/1.5 Album page
 - 0.5/0.5 Track page
+- +1 Official multi-user session bonus
 
 2. How long, in hours, did it take you to complete this assignment?
 
-[ADD TOTAL TEAM HOURS] hours.
+[REQUIRED BEFORE SUBMISSION: ENTER TOTAL HOURS] hours.
 
 3. What online resources did you consult when completing this assignment? (list specific URLs)
 
 Canvas assignment instructions and rubric; the provided A3 starter repository;
-Angular documentation for template control flow, forms, routing, and HttpClient;
-Bootstrap carousel/progress documentation; and generative AI for planning,
-implementation assistance, debugging, and test-case review.
+and the following documentation:
+
+- https://canvas.eee.uci.edu/courses/85916/assignments/1904213
+- https://github.com/travislindenreid/a3-spotify
+- https://angular.dev/guide/templates/control-flow
+- https://angular.dev/guide/forms/template-driven-forms
+- https://angular.dev/guide/routing
+- https://angular.dev/guide/http/making-requests
+- https://getbootstrap.com/docs/5.3/components/carousel/
+- https://getbootstrap.com/docs/5.3/components/progress/
+- https://developer.spotify.com/documentation/web-api/tutorials/code-flow
+- https://github.com/expressjs/session
+
+OpenAI Codex was used for planning, implementation assistance, debugging,
+UI review, documentation, and test-case review. Stella Jiang reviewed and
+accepted the submitted implementation and remains its sole author.
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
 
-Stella Jiang is the sole author of the submitted implementation and completed
-the required coding, integration, testing, and documentation. No classmates or
-other individuals contributed code. Canvas currently lists A3 Pair 47; the
-partner survey will accurately report the work distribution.
+No classmates or other individuals contributed code. Stella Jiang completed
+the coding, integration, testing, and documentation. Canvas currently lists A3
+Pair 47; the partner survey will report Stella's contribution accurately.
 
 5. Did you add a bonus feature to your submission? If so, what is it and how should we see it?
 
@@ -45,15 +59,34 @@ localStorage.
 
 6. Is there anything special we need to know in order to run your code?
 
-Download the Canvas dummy_webserver, run \`npm install\` and \`npm start\` in that
-folder, then run \`npm install\` and \`ng serve\` from the \`client\` folder. Open
-http://localhost:4200. The required implementation uses the dummy server at
-http://127.0.0.1:8888 and does not require Spotify login. Both group members
-must complete the A3 partner survey; only one group member needs to submit the
-ZIP.
+Required 10-point grading path (Canvas dummy_webserver):
 
-To test the official multi-user bonus, create ignored
-\`webserver/client_secret.json\` with \`client_id\` and \`client_secret\`, add
-http://127.0.0.1:8888/callback to the Spotify app's redirect URIs, and run the
-included \`webserver\`. The Spotify app owner and each allowlisted test user
-must meet Spotify's current Development Mode account requirements.
+1. Download the Canvas dummy_webserver.
+2. Run `npm install` and `npm start` in the dummy_webserver folder. It must
+   listen at http://127.0.0.1:8888.
+3. Run `npm install` and `npm start` from this repository's `client` folder.
+4. Open http://localhost:4200.
+5. Click `Load info about me`; no Spotify login is required with the dummy
+   server. Test Artist, Album, and Track searches and open their detail pages.
+
+Official multi-user bonus path (included non-dummy webserver):
+
+This path requires a Spotify Premium account, as specified by the assignment.
+
+1. Copy `webserver/client_secret.example.json` to
+   `webserver/client_secret.json`, then replace both placeholder values.
+2. Add http://127.0.0.1:8888/callback to the Spotify Developer App's redirect
+   URIs and add any permitted test users in the Spotify dashboard.
+3. Run `npm install` and `npm start` in `webserver`.
+4. Run `npm install` and `npm start -- --host 127.0.0.1` in `client`.
+5. Open http://127.0.0.1:4200 and choose `Log in`. After Spotify redirects
+   back, click `Load info about me` to request `/me` explicitly.
+6. To demonstrate isolation, repeat the login in a separate private browser
+   window. Each browser receives its own server session; logging out of one
+   does not log out the other.
+
+The bonus server uses the default in-memory express-session store, so local
+sessions are cleared whenever that server restarts. `client_secret.json`,
+`tokens.json`, `.git`, `node_modules`, Angular caches, and build output must not
+be included in the submitted ZIP. Complete the Canvas partner survey as
+required; only one group submission should be uploaded.

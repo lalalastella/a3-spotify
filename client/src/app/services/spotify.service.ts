@@ -21,6 +21,8 @@ export class SpotifyService {
 
     //firstValueFrom generates a Promise for whatever is returned first from the GET request.
     //You shouldn't need to update this part.
+    // The Canvas dummy server needs ordinary requests; credentials are enabled
+    // only after the included OAuth server creates a per-browser session.
     return firstValueFrom(this.http.get(uri, {withCredentials: this.authState.sessionMode}));
   }
 

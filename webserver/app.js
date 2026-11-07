@@ -23,6 +23,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// The default MemoryStore is sufficient for this local coursework demo. It
+// intentionally clears all login sessions whenever the server restarts.
 app.use(session({
   name: 'tunecrate.sid',
   secret: sessionSecret,

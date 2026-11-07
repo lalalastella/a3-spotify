@@ -9,8 +9,9 @@ webserver, verify every rubric item, and produce a submission-ready ZIP without
 ## Gate 1: Workspace and runtime
 
 - [x] Starter repository is present locally.
-- [ ] The shared GitHub Classroom/team repository is connected and its existing work is reconciled before delivery.
-- [ ] Canvas `dummy_webserver` is downloaded and unpacked.
+- [x] The implementation is committed and pushed to the project repository.
+- [x] Canvas `dummy_webserver` was downloaded to a temporary directory and used
+      for the final official-server smoke test; it is not stored in this repo.
 - [x] Dependencies install for the Angular client.
 - [x] A contract-compatible acceptance server responds on `127.0.0.1:8888`.
 - [x] Angular client serves on `localhost:4200`.
@@ -50,14 +51,15 @@ webserver, verify every rubric item, and produce a submission-ready ZIP without
 - [x] Existing starter-only test/lint incompatibilities are documented in the acceptance report.
 - [x] Home, search modes, artist, album, and track routes are exercised in a browser.
 - [x] Browser console has no application errors during the acceptance flow.
+- [x] Final runtime flow passes against Canvas's official `dummy_webserver`.
 
 ## Gate 6: Submission package
 
-- [ ] `readme.txt` contains both partners' identifying information, A3 Pair 47,
-      claimed points, time, consulted resources, bonus status, and run notes.
-- [ ] Partner survey requirement is called out for both students.
-- [ ] `node_modules` is absent from the ZIP.
-- [ ] ZIP contents are audited and the archive opens successfully.
+- [ ] `readme.txt` is complete except for the user-supplied total-hours value.
+- [x] Sole-author status and the partner survey requirement are documented.
+- [x] Submission exclusions for `node_modules`, secrets, build output, caches,
+      and `.git` are documented.
+- [ ] Final ZIP contents must be audited immediately before Canvas submission.
 - [ ] Canvas upload is performed only after explicit confirmation.
 
 ## Execution order
@@ -65,4 +67,6 @@ webserver, verify every rubric item, and produce a submission-ready ZIP without
 Service -> shared components -> Home search -> Artist -> Album -> Track -> build
 and browser QA -> README -> clean ZIP.
 
-Bonus work is intentionally deferred until every required rubric item passes.
+The required rubric implementation passes the current acceptance suite. The
+official multi-user bonus and the supplemental Local Favorites feature are also
+implemented; required behavior remains the grading priority.
