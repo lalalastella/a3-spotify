@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 export interface ConnectedProfile {
   name:string;
   imageURL:string;
+  spotifyProfile?:string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -24,6 +25,10 @@ export class AuthStateService {
 
   get sessionMode():boolean {
     return this.sessionModeEnabled;
+  }
+
+  get profile():ConnectedProfile {
+    return this.profileSubject.value;
   }
 
   enableSessionMode() {

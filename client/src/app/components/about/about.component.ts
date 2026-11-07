@@ -25,6 +25,13 @@ export class AboutComponent implements OnInit {
       this.authState.markSessionConnected();
       window.history.replaceState({}, '', window.location.pathname);
     }
+
+    const cachedProfile = this.authState.profile;
+    if(cachedProfile) {
+      this.name = cachedProfile.name;
+      this.profile_pic = cachedProfile.imageURL;
+      this.profile_link = cachedProfile.spotifyProfile || null;
+    }
   }
 
   loadProfile() {
@@ -37,7 +44,11 @@ export class AboutComponent implements OnInit {
       this.profile_pic = profile.imageURL;
       this.profile_link = profile.spotifyProfile;
       if(this.authState.sessionMode) {
-        this.authState.setProfile({ name: profile.name, imageURL: profile.imageURL });
+        this.authState.setProfile({
+          name: profile.name,
+          imageURL: profile.imageURL,
+          spotifyProfile: profile.spotifyProfile
+        });
       }
       this.isLoading = false;
     }).catch((error) => {
