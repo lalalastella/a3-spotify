@@ -1,5 +1,7 @@
 .artist-layout {
 	display: grid;
+	width: 100%;
+	min-width: 0;
 	grid-template-areas:
 		"back back back"
 		"title stats tracks"
@@ -9,6 +11,10 @@
 	column-gap: clamp(1.5rem, 3vw, 2.5rem);
 	row-gap: 1.25rem;
 	align-items: start;
+}
+
+.artist-layout > * {
+	min-width: 0;
 }
 
 .back-link {
@@ -38,6 +44,7 @@
 	aspect-ratio: 1;
 	object-fit: cover;
 	border-radius: var(--app-radius);
+	background: var(--app-surface-raised) url('/assets/unknown.jpg') center / cover no-repeat;
 	box-shadow: var(--app-shadow);
 }
 
@@ -47,6 +54,10 @@
 	align-items: flex-start;
 	flex-direction: column;
 	gap: 0.8rem;
+}
+
+.resource-actions .btn {
+	align-self: flex-start;
 }
 
 .artist-albums {

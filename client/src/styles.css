@@ -18,12 +18,15 @@
 
 html {
 	background: var(--app-bg);
+	overflow-x: clip;
 }
 
 body {
+	width: 100%;
 	min-width: 320px;
 	min-height: 100vh;
 	margin: 0;
+	overflow-x: clip;
 	background:
 		radial-gradient(circle at 8% -10%, rgba(30, 215, 96, 0.12), transparent 28rem),
 		var(--app-bg);
@@ -82,7 +85,13 @@ select {
 
 button,
 .btn {
+	display: inline-flex;
+	width: fit-content;
+	max-width: 100%;
+	align-items: center;
+	justify-content: center;
 	font-weight: 700;
+	white-space: normal;
 	transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
 }
 

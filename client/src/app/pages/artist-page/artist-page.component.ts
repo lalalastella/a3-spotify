@@ -35,4 +35,11 @@ export class ArtistPageComponent implements OnInit {
     this.isSaved = this.favoritesService.toggle(this.artist);
   }
 
+  useFallbackImage(event: Event) {
+    const image = event.target as HTMLImageElement;
+    if (!image.src.endsWith('/assets/unknown.jpg')) {
+      image.src = 'assets/unknown.jpg';
+    }
+  }
+
 }

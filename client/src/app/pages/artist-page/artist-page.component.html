@@ -8,7 +8,7 @@
 			@if(artist.popularity) { <app-thermometer [popularity]="artist.popularity"></app-thermometer> }
 		</div>
 
-		<img id="artistImg" [src]="artist.imageURL" [alt]="artist.name">
+		<img id="artistImg" [src]="artist.imageURL" [alt]="artist.name" (error)="useFallbackImage($event)">
 
 		<div class="resource-actions">
 			<a class="btn btn-light" role="button" [href]="artist.url" target="_blank" rel="noopener noreferrer">Open {{ artist.name }} on Spotify</a>
