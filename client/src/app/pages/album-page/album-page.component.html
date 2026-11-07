@@ -1,20 +1,27 @@
 @if(album) {
-	<div class="row">
-		<div class="col-12 col-sm-6">
-			<h1>{{ album.name }}</h1>
-			<img id="albumImg" [src]="album.imageURL" [alt]="album.name">
+	<div class="album-layout">
+		<h1 class="album-title">{{ album.name }}</h1>
+
+		<div class="album-stats">
 			@if(album.popularity) { <app-thermometer [popularity]="album.popularity"></app-thermometer> }
+		</div>
+
+		<img id="albumImg" [src]="album.imageURL" [alt]="album.name">
+
+		<div class="album-meta">
 			@for(artist of album.artists; track artist.id) {
 				<p>Artist: <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a></p>
 			}
-			<div class="resource-actions">
-				<a class="btn btn-light" role="button" [href]="album.url" target="_blank" rel="noopener noreferrer">Open {{ album.name }} on Spotify</a>
-				<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
-			</div>
 		</div>
-		<div class="col-12 col-sm-6">
+
+		<div class="resource-actions">
+			<a class="btn btn-light" role="button" [href]="album.url" target="_blank" rel="noopener noreferrer">Open {{ album.name }} on Spotify</a>
+			<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
+		</div>
+
+		<section class="album-tracks">
 			<h3>Album Tracks</h3>
 			@if(tracks) { <app-track-list [tracks]="tracks" [hideArtist]="true" [hideAlbum]="true"></app-track-list> }
-		</div>
+		</section>
 	</div>
 }

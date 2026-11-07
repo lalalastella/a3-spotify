@@ -1,27 +1,26 @@
-<div class="row">
-	@if(track) {
-		<div class="col-sm-6 col-12">
-			<h1>{{ track.name }}</h1>
+@if(track) {
+	<div class="track-layout">
+		<h1 class="track-title">{{ track.name }}</h1>
+
+		<div class="track-stats">
+			@if(track.popularity) { <app-thermometer [popularity]="track.popularity"></app-thermometer> }
+		</div>
+
+		<div class="track-details">
 			<p>
 				Track on <a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a>
 			</p>
-			<div>
-				@for(artist of track.artists; track artist.id) {
-				<p>
-					Artist: <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a>
-				</p>
-				}
-			</div>
+			@for(artist of track.artists; track artist.id) {
+				<p>Artist: <a [routerLink]="['/artist', artist.id]">{{ artist.name }}</a></p>
+			}
 			<p>
 				Duration: {{ track.durationStr }}
 			</p>
-			<p>
-				<a class="btn btn-light" role="button" [href]="track.url" target="_blank" rel="noopener noreferrer">Open {{ track.name }} on Spotify</a>
-			</p>
+		</div>
+
+		<div class="track-actions">
+			<a class="btn btn-light" role="button" [href]="track.url" target="_blank" rel="noopener noreferrer">Open {{ track.name }} on Spotify</a>
 			<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
 		</div>
-		<div class="col-sm-6 col-12">
-			@if(track.popularity) { <app-thermometer [popularity]="track.popularity"></app-thermometer> }
-		</div>
-	}
-</div>
+	</div>
+}
