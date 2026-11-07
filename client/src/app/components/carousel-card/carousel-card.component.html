@@ -1,6 +1,7 @@
 <a [routerLink]="['/', resource.category, resource.id]">
 	<img class="d-block w-100" [src]="resource.imageURL" [alt]="resource.name" loading="lazy" decoding="async">
-	<div class="carousel-caption d-none d-md-block">
+	<div class="carousel-caption">
+		<span>{{ resource.category }}</span>
 		<h5>{{ resource.name }}</h5>
 	</div>
-	</a>
+</a>

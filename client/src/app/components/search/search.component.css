@@ -61,7 +61,25 @@ select {
 }
 
 select {
+	-webkit-appearance: none;
+	appearance: none;
+	padding-right: 2.6rem;
+	background-color: #0f1418;
+	background-image:
+		linear-gradient(45deg, transparent 50%, var(--app-muted) 50%),
+		linear-gradient(135deg, var(--app-muted) 50%, transparent 50%);
+	background-position:
+		calc(100% - 18px) calc(50% - 2px),
+		calc(100% - 12px) calc(50% - 2px);
+	background-repeat: no-repeat;
+	background-size: 6px 6px, 6px 6px;
+	color-scheme: dark;
 	text-transform: capitalize;
+}
+
+select option {
+	background: #151b20;
+	color: var(--app-text);
 }
 
 .results {

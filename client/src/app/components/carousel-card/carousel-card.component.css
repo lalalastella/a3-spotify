@@ -16,10 +16,25 @@ img {
 	bottom: 0;
 	padding: 3rem 1.25rem 1.2rem;
 	background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
+	color: white;
 	text-align: left;
+}
+
+.carousel-caption span {
+	display: block;
+	margin-bottom: 0.25rem;
+	color: var(--app-focus);
+	font-size: 0.68rem;
+	font-weight: 900;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
 }
 
 .carousel-caption h5 {
 	margin: 0;
+	color: #fff;
+	font-size: clamp(1.05rem, 3vw, 1.45rem);
 	font-weight: 900;
+	line-height: 1.15;
+	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
 }

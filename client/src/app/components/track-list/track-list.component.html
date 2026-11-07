@@ -13,16 +13,16 @@
 		<tbody>
 			@for(track of tracks; track track.id; let index=$index) {
 			<tr>
-				<td>{{ index + 1 }}</td>
-				<td>
+				<td data-label="#">{{ index + 1 }}</td>
+				<td data-label="Track">
 					<a [routerLink]="['/track', track.id]">{{ track.name }}</a>
 				</td>
-				<td>{{ track.durationStr }}</td>
+				<td data-label="Duration">{{ track.durationStr }}</td>
 				@if(!hideArtist) {
-					<td><a [routerLink]="['/artist', track.artists[0].id]">{{ track.artists[0].name }}</a></td>
+					<td data-label="Primary artist"><a [routerLink]="['/artist', track.artists[0].id]">{{ track.artists[0].name }}</a></td>
 				}
 				@if(!hideAlbum) {
-					<td><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
+					<td data-label="Album"><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
 				}
 			</tr>
 			}

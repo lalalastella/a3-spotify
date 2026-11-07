@@ -1,4 +1,5 @@
 .track-table-wrap {
+	container: track-list / inline-size;
 	width: 100%;
 	overflow-x: auto;
 	border: 1px solid var(--app-border);
@@ -6,7 +7,8 @@
 }
 
 table {
-	min-width: 560px;
+	width: 100%;
+	min-width: 680px;
 	margin: 0;
 	color: var(--dark);
 }
@@ -19,4 +21,70 @@ td {
 
 td a {
 	font-weight: 700;
+	overflow-wrap: anywhere;
+}
+
+th:first-child,
+td:first-child {
+	width: 3rem;
+}
+
+@container track-list (max-width: 720px) {
+	.track-table-wrap {
+		overflow: hidden;
+	}
+
+	table,
+	tbody,
+	tr,
+	td {
+		display: block;
+		width: 100%;
+	}
+
+	table {
+		min-width: 0;
+	}
+
+	thead {
+		display: none;
+	}
+
+	tbody tr {
+		display: grid;
+		grid-template-columns: minmax(7.5rem, 0.38fr) minmax(0, 1fr);
+		padding: 0.65rem 0.85rem;
+		border-bottom: 1px solid #c6c9cb;
+	}
+
+	tbody tr:last-child {
+		border-bottom: 0;
+	}
+
+	td,
+	td:first-child {
+		display: grid;
+		grid-column: 1 / -1;
+		grid-template-columns: subgrid;
+		width: 100%;
+		padding: 0.42rem 0;
+		border: 0;
+	}
+
+	td::before {
+		content: attr(data-label);
+		color: #46515a;
+		font-size: 0.7rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+}
+
+@supports not (container-type: inline-size) {
+	@media (max-width: 760px) {
+		table {
+			min-width: 680px;
+		}
+	}
 }
