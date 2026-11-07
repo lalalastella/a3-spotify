@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthStateService } from './services/auth-state.service';
 
 @Component({
@@ -7,8 +7,12 @@ import { AuthStateService } from './services/auth-state.service';
     styleUrls: ['./app.component.css'],
     standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   constructor(public authState:AuthStateService) {
+  }
+
+  ngOnInit() {
+    this.authState.validateStoredSession();
   }
 }

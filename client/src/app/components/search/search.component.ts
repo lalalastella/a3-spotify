@@ -66,9 +66,15 @@ export class SearchComponent implements OnInit {
     this.spotifyService.searchFor(this.searchCategory, query).then((resources) => {
       this.resources = resources;
       this.isLoading = false;
-    }).catch(() => {
+    }).catch((error) => {
       this.resources = [];
-      this.errorMessage = 'Search could not be completed. Check your Spotify login and try again.';
+      if(error?.status === 401) {
+        this.errorMessage = 'Your Spotify session has expired. Log in again to search.';
+      } else if(error?.status === 0) {
+        this.errorMessage = 'The course server is unavailable. Start the server on port 8888 and try again.';
+      } else {
+        this.errorMessage = 'Search could not be completed. Try again in a moment.';
+      }
       this.isLoading = false;
     });
   }

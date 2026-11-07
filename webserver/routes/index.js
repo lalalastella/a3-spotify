@@ -153,6 +153,15 @@ router.get('/logout', function(req, res) {
 	});
 });
 
+// Lets the Angular client validate a cached login without loading the profile.
+// The Canvas dummy server does not expose this bonus-only endpoint, so a 404
+// also tells the client to discard stale OAuth state and use anonymous mode.
+router.get('/session', function(req, res) {
+	res.json({
+		authenticated: Boolean(req.session.spotify && req.session.spotify.access_token)
+	});
+});
+
 router.get('/me', function(req, res) {
 	makeAPIRequest(req, 'https://api.spotify.com/v1/me', res);
 });

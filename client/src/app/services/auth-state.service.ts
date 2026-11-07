@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, firstValueFrom } from 'rxjs';
 
 export interface ConnectedProfile {
   name:string;
@@ -18,6 +19,8 @@ export class AuthStateService {
 
   readonly connected$ = this.connectedSubject.asObservable();
   readonly profile$ = this.profileSubject.asObservable();
+
+  constructor(private http:HttpClient) {}
 
   get isConnected():boolean {
     return this.connectedSubject.value;
@@ -59,6 +62,26 @@ export class AuthStateService {
     localStorage.removeItem(this.profileStorageKey);
     localStorage.removeItem(this.sessionModeKey);
     this.sessionModeEnabled = false;
+  }
+
+  async validateStoredSession():Promise<void> {
+    if(!this.sessionModeEnabled) {
+      return;
+    }
+
+    try {
+      const status:any = await firstValueFrom(this.http.get(
+        'http://127.0.0.1:8888/session',
+        {withCredentials: true}
+      ));
+      if(!status || status.authenticated !== true) {
+        this.clear();
+      }
+    } catch {
+      // The required Canvas dummy server intentionally has no /session route.
+      // A stopped/restarted bonus server likewise has no usable OAuth session.
+      this.clear();
+    }
   }
 
   private readStoredState():boolean {
