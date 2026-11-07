@@ -3,9 +3,11 @@
 	<h1 id="search-heading">Search Spotify</h1>
 	<p class="search-intro">Choose what you want to find, then explore the matching catalog.</p>
 	<form class="search-form" (ngSubmit)="search()">
-		<label for="spotify-search">Search term</label>
 		<div class="search-controls">
-			<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder="Try an artist or song" autocomplete="off">
+			<div class="floating-field">
+				<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder=" " autocomplete="off">
+				<label for="spotify-search">Try an artist or song</label>
+			</div>
 			<select id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null" aria-label="Search category">
 				@for(category of searchCategories; track category) {
 					<option [value]="category">{{ category }}</option>

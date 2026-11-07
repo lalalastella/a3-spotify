@@ -8,17 +8,33 @@
 	color: var(--app-muted);
 }
 
-.search-form label {
-	display: block;
-	margin-bottom: 0.5rem;
-	font-size: 0.86rem;
-	font-weight: 700;
-}
-
 .search-controls {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(110px, auto) auto;
 	gap: 0.75rem;
+}
+
+.floating-field {
+	position: relative;
+	min-width: 0;
+}
+
+.floating-field label {
+	position: absolute;
+	top: 50%;
+	left: 1rem;
+	max-width: calc(100% - 2rem);
+	margin: 0;
+	overflow: hidden;
+	transform: translateY(-50%);
+	color: #8e9aa2;
+	font-size: 1rem;
+	font-weight: 700;
+	line-height: 1;
+	pointer-events: none;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	transition: top 160ms ease, color 160ms ease, font-size 160ms ease, letter-spacing 160ms ease, transform 160ms ease;
 }
 
 input,
@@ -30,8 +46,18 @@ select {
 	color: var(--app-text);
 }
 
-input::placeholder {
-	color: #7f8b93;
+.floating-field input {
+	padding: 1.15rem 1rem 0.3rem;
+}
+
+.floating-field input:focus + label,
+.floating-field input:not(:placeholder-shown) + label {
+	top: 0.45rem;
+	transform: none;
+	color: var(--app-accent);
+	font-size: 0.64rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 select {
