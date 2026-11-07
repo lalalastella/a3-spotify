@@ -6,6 +6,7 @@ import { AlbumData } from '../data/album-data';
 import { TrackData } from '../data/track-data';
 import { ResourceData } from '../data/resource-data';
 import { ProfileData } from '../data/profile-data';
+import { AuthStateService } from './auth-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +14,14 @@ import { ProfileData } from '../data/profile-data';
 export class SpotifyService {
 	expressBaseUrl:string = 'http://127.0.0.1:8888';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private authState:AuthStateService) { }
 
   private sendRequestToExpress(endpoint:string):Promise<any> {
     const uri:string = this.expressBaseUrl + endpoint;
 
     //firstValueFrom generates a Promise for whatever is returned first from the GET request.
     //You shouldn't need to update this part.
-    return firstValueFrom(this.http.get(uri));
+    return firstValueFrom(this.http.get(uri, {withCredentials: this.authState.sessionMode}));
   }
 
   aboutMe():Promise<ProfileData> {

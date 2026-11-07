@@ -8,11 +8,43 @@
 				<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder=" " autocomplete="off">
 				<label for="spotify-search">Try an artist or song</label>
 			</div>
-			<select id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null; errorMessage = null" aria-label="Search category">
+			<select class="native-category-select" id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null; errorMessage = null" aria-hidden="true" tabindex="-1">
 				@for(category of searchCategories; track category) {
 					<option [value]="category">{{ category }}</option>
 				}
 			</select>
+			<div class="category-picker" (click)="$event.stopPropagation()">
+				<button
+					type="button"
+					class="category-trigger"
+					[attr.aria-label]="'Search category: ' + searchCategory"
+					[attr.aria-expanded]="isCategoryMenuOpen"
+					aria-controls="category-menu"
+					aria-haspopup="listbox"
+					(click)="toggleCategoryMenu()"
+					(keydown)="onCategoryTriggerKeydown($event)">
+					<span class="category-icon" aria-hidden="true">{{ categoryIcon(searchCategory) }}</span>
+					<span>{{ searchCategory }}</span>
+					<span class="category-chevron" aria-hidden="true"></span>
+				</button>
+				@if(isCategoryMenuOpen) {
+					<div class="category-menu" id="category-menu" role="listbox" aria-label="Search category">
+						@for(category of searchCategories; track category) {
+							<button
+								type="button"
+								class="category-option"
+								[class.is-selected]="searchCategory === category"
+								[attr.aria-selected]="searchCategory === category"
+								role="option"
+								(click)="selectCategory(category)">
+								<span class="option-check" aria-hidden="true">{{ searchCategory === category ? '✓' : '' }}</span>
+								<span class="category-icon" aria-hidden="true">{{ categoryIcon(category) }}</span>
+								<span>{{ category }}</span>
+							</button>
+						}
+					</div>
+				}
+			</div>
 			<button type="submit" class="btn btn-light" [disabled]="isLoading">
 				@if(isLoading) { <span class="button-spinner" aria-hidden="true"></span> Searching } @else { Search }
 			</button>

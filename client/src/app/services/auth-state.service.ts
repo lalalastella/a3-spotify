@@ -10,8 +10,10 @@ export interface ConnectedProfile {
 export class AuthStateService {
   private readonly storageKey = 'tunecrate-spotify-connected';
   private readonly profileStorageKey = 'tunecrate-spotify-profile';
+  private readonly sessionModeKey = 'tunecrate-session-mode';
   private readonly connectedSubject = new BehaviorSubject<boolean>(this.readStoredState());
   private readonly profileSubject = new BehaviorSubject<ConnectedProfile>(this.readStoredProfile());
+  private sessionModeEnabled = localStorage.getItem(this.sessionModeKey) === 'true' || this.readStoredState();
 
   readonly connected$ = this.connectedSubject.asObservable();
   readonly profile$ = this.profileSubject.asObservable();
@@ -20,9 +22,19 @@ export class AuthStateService {
     return this.connectedSubject.value;
   }
 
+  get sessionMode():boolean {
+    return this.sessionModeEnabled;
+  }
+
+  enableSessionMode() {
+    this.sessionModeEnabled = true;
+    localStorage.setItem(this.sessionModeKey, 'true');
+  }
+
   setProfile(profile:ConnectedProfile) {
     this.connectedSubject.next(true);
     this.profileSubject.next(profile);
+    this.enableSessionMode();
     localStorage.setItem(this.storageKey, 'true');
     localStorage.setItem(this.profileStorageKey, JSON.stringify(profile));
   }
@@ -32,6 +44,8 @@ export class AuthStateService {
     this.profileSubject.next(null);
     localStorage.removeItem(this.storageKey);
     localStorage.removeItem(this.profileStorageKey);
+    localStorage.removeItem(this.sessionModeKey);
+    this.sessionModeEnabled = false;
   }
 
   private readStoredState():boolean {

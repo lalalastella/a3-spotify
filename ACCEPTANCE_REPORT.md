@@ -17,7 +17,14 @@ Canvas group: A3 Pair 47
 | Album page | 1.5/1.5 | Displayed album data, artist links, 73% popularity, and tracks with redundant columns hidden. |
 | Track page | 0.5/0.5 | Displayed album, all artists, 3:05 duration, Spotify URL, and 91% popularity. |
 
-Target: 10/10 required points. No bonus feature was attempted.
+Target: 10/10 required points plus the 1-point official multi-user bonus.
+
+Bonus evidence: the non-dummy Express server uses `express-session`; access and
+refresh tokens live inside the requesting browser's server-side session, API
+requests read only that session, and Logout destroys only that session. The
+client sends credentials only after a real OAuth callback so the required
+Canvas dummy server flow remains compatible. A Local Favorites Library is also
+included, though the assignment caps bonus credit at one point.
 
 ## Automated validation
 
@@ -25,11 +32,14 @@ Target: 10/10 required points. No bonus feature was attempted.
 - `ng serve`: PASS; compiled successfully on `127.0.0.1:4200`.
 - Browser acceptance: PASS for profile, all three search categories, and all three detail routes.
 - Browser console: PASS; zero error-level entries during the acceptance flow.
+- Multi-user session isolation: PASS; two independent browser cookies were
+  issued and both unauthenticated sessions received `401` from `/me` without
+  gaining access to another session's Spotify data.
 - Remaining `TODO`/`???` markers under `client/src/app`: none.
 
 Final re-validation on November 7, 2026:
 
-- Production build hash `67215609e1167fe9`: PASS.
+- Production build hash `3dfc2f98c670f1bc`: PASS with no warnings.
 - Profile, artist/album/track search, Artist page, Album page, and Track page: PASS.
 - Internal route targets and Album hidden-column behavior: PASS.
 - Browser console error count: 0.

@@ -2,12 +2,22 @@
 	<p class="eyebrow">Your listening identity</p>
 	<h1 id="profile-heading">Spotify profile</h1>
 	<img [src]="profile_pic" class="profile" [alt]="name ? name + ' Spotify profile picture' : 'Default profile picture'">
-	<h3>Logged in user: {{ name || 'Unknown' }}</h3>
+	@if(name) {
+		<h3>Logged in user: {{ name }}</h3>
+	} @else if(loginRequired) {
+		<h3>Spotify account not connected</h3>
+	} @else {
+		<h3>Load your profile to get started</h3>
+	}
 	@if(errorMessage) { <p class="profile-error" role="alert">{{ errorMessage }}</p> }
 	<div class="profile-actions">
-		<button class="btn btn-light" (click)="loadProfile()" [disabled]="isLoading">
-			@if(isLoading) { Loading profile… } @else if(name) { Reload profile } @else { Load info about me }
-		</button>
+		@if(loginRequired) {
+			<a class="btn btn-light" href="http://127.0.0.1:8888/login">Log in to Spotify</a>
+		} @else {
+			<button class="btn btn-light" (click)="loadProfile()" [disabled]="isLoading">
+				@if(isLoading) { Loading profile… } @else if(name) { Reload profile } @else { Load info about me }
+			</button>
+		}
 		@if(profile_link) {
 			<a class="profile-link" [href]="profile_link" target="_blank" rel="noopener noreferrer">Open profile on Spotify <span aria-hidden="true">↗</span></a>
 		}
