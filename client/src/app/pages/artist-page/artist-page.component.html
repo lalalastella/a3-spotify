@@ -1,22 +1,27 @@
 @if(artist) {
-	<div class="row">
-		<div class="col-xl-4 col-12">
-			<h1>{{ artist.name }}</h1>
-			<img id="artistImg" [src]="artist.imageURL" [alt]="artist.name">
-			<div class="resource-actions">
-				<a class="btn btn-light" role="button" [href]="artist.url" target="_blank" rel="noopener noreferrer">Open {{ artist.name }} on Spotify</a>
-				<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
-			</div>
-		</div>
-		<div class="col-xl-4 col-12">
+	<div class="artist-layout">
+		<h1 class="artist-title">{{ artist.name }}</h1>
+
+		<div class="artist-stats">
 			<p>{{ artist.followersStr }} followers</p>
 			@if(artist.popularity) { <app-thermometer [popularity]="artist.popularity"></app-thermometer> }
+		</div>
+
+		<img id="artistImg" [src]="artist.imageURL" [alt]="artist.name">
+
+		<div class="resource-actions">
+			<a class="btn btn-light" role="button" [href]="artist.url" target="_blank" rel="noopener noreferrer">Open {{ artist.name }} on Spotify</a>
+			<button type="button" class="btn btn-favorite" [class.is-saved]="isSaved" [attr.aria-pressed]="isSaved" (click)="toggleFavorite()">{{ isSaved ? 'Saved to favorites' : 'Save to favorites' }}</button>
+		</div>
+
+		<section class="artist-albums">
 			<h3>{{ artist.name }}'s Albums</h3>
 			@if(albums) { <app-carousel [resources]="albums" carouselId="artistAlbums"></app-carousel> }
-		</div>
-		<div class="col-xl-4 col-12">
+		</section>
+
+		<section class="artist-tracks">
 			<h3>{{ artist.name }}'s Top Tracks</h3>
 			@if(topTracks) { <app-track-list [tracks]="topTracks"></app-track-list> }
-		</div>
+		</section>
 	</div>
 }

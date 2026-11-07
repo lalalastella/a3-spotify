@@ -1,4 +1,33 @@
+.artist-layout {
+	display: grid;
+	grid-template-areas:
+		"title stats tracks"
+		"image albums tracks"
+		"actions albums tracks";
+	grid-template-columns: minmax(260px, 0.95fr) minmax(280px, 1fr) minmax(340px, 1.2fr);
+	column-gap: clamp(1.5rem, 3vw, 2.5rem);
+	row-gap: 1.25rem;
+	align-items: start;
+}
+
+.artist-title {
+	grid-area: title;
+	margin-bottom: 0;
+}
+
+.artist-stats {
+	grid-area: stats;
+	padding-top: 0.35rem;
+}
+
+.artist-stats p {
+	margin: 0 0 0.35rem;
+	color: var(--app-muted);
+	font-variant-numeric: tabular-nums;
+}
+
 #artistImg {
+	grid-area: image;
 	display: block;
 	width: min(100%, 400px);
 	aspect-ratio: 1;
@@ -8,13 +37,61 @@
 }
 
 .resource-actions {
+	grid-area: actions;
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
 	gap: 0.8rem;
-	margin-top: 1rem;
 }
 
-.row {
-	row-gap: 2rem;
+.artist-albums {
+	grid-area: albums;
+}
+
+.artist-tracks {
+	grid-area: tracks;
+	min-width: 0;
+}
+
+.artist-albums h3,
+.artist-tracks h3 {
+	margin-bottom: 0.75rem;
+}
+
+@media (max-width: 1100px) {
+	.artist-layout {
+		grid-template-areas:
+			"title stats"
+			"image albums"
+			"actions albums"
+			"tracks tracks";
+		grid-template-columns: minmax(260px, 0.9fr) minmax(300px, 1.1fr);
+	}
+}
+
+@media (max-width: 700px) {
+	.artist-layout {
+		grid-template-areas:
+			"title"
+			"stats"
+			"image"
+			"actions"
+			"albums"
+			"tracks";
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 1.15rem;
+	}
+
+	.artist-stats {
+		padding-top: 0;
+	}
+
+	#artistImg {
+		width: min(100%, 400px);
+	}
+
+	.artist-albums,
+	.artist-tracks {
+		margin-top: 0.65rem;
+	}
 }
