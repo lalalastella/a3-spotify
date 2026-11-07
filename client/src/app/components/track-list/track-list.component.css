@@ -2,21 +2,19 @@
 	container: track-list / inline-size;
 	width: 100%;
 	overflow-x: auto;
-	border: 1px solid var(--app-border);
-	border-radius: 14px;
-	background: #12181d;
 }
 
 .track-table {
 	width: 100%;
 	min-width: 680px;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0 2px;
 	color: var(--app-text);
-	background: #12181d;
+	background: transparent;
 }
 
 thead {
-	background: #0f1418;
+	background: transparent;
 }
 
 th {
@@ -32,21 +30,22 @@ th {
 
 td {
 	padding: 0.82rem 0.7rem;
-	border-bottom: 1px solid rgba(48, 58, 66, 0.72);
+	border: 0;
 	color: var(--app-muted);
 	vertical-align: middle;
-}
-
-tbody tr {
 	transition: background-color 160ms ease;
 }
 
-tbody tr:hover {
-	background: #192127;
+tbody tr:hover td {
+	background: rgba(255, 255, 255, 0.055);
 }
 
-tbody tr:last-child td {
-	border-bottom: 0;
+tbody tr:hover td:first-child {
+	border-radius: 6px 0 0 6px;
+}
+
+tbody tr:hover td:last-child {
+	border-radius: 0 6px 6px 0;
 }
 
 td a {
@@ -110,11 +109,7 @@ td a:hover {
 		grid-template-columns: 2.35rem minmax(0, 1fr) auto;
 		gap: 0.18rem 0.55rem;
 		padding: 0.82rem 0.25rem;
-		border-bottom: 1px solid rgba(48, 58, 66, 0.72);
-	}
-
-	tbody tr:last-child {
-		border-bottom: 0;
+		border-radius: 6px;
 	}
 
 	td,
@@ -161,6 +156,14 @@ td a:hover {
 	.album-cell::before {
 		content: attr(data-label) " · ";
 		color: #65717a;
+	}
+
+	tbody tr:hover {
+		background: rgba(255, 255, 255, 0.055);
+	}
+
+	tbody tr:hover td {
+		background: transparent;
 	}
 }
 
