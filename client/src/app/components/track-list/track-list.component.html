@@ -1,9 +1,9 @@
 @if(tracks) {
 	<div class="track-table-wrap">
-	<table class="table table-sm table-light table-striped">
+	<table class="track-table">
 		<thead>
 			<tr>
-				<th scope="col">#</th>
+				<th class="rank-heading" scope="col">Rank</th>
 				<th scope="col">Track</th>
 				<th scope="col">Duration</th>
 				@if(!hideArtist) { <th scope="col">Primary Artist</th> }
@@ -13,16 +13,16 @@
 		<tbody>
 			@for(track of tracks; track track.id; let index=$index) {
 			<tr>
-				<td data-label="#">{{ index + 1 }}</td>
-				<td data-label="Track">
+				<td class="rank-cell" data-label="Rank">{{ formatRank(index) }}</td>
+				<td class="track-cell" data-label="Track">
 					<a [routerLink]="['/track', track.id]">{{ track.name }}</a>
 				</td>
-				<td data-label="Duration">{{ track.durationStr }}</td>
+				<td class="duration-cell" data-label="Duration">{{ track.durationStr }}</td>
 				@if(!hideArtist) {
-					<td data-label="Primary artist"><a [routerLink]="['/artist', track.artists[0].id]">{{ track.artists[0].name }}</a></td>
+					<td class="artist-cell" data-label="Artist"><a [routerLink]="['/artist', track.artists[0].id]">{{ track.artists[0].name }}</a></td>
 				}
 				@if(!hideAlbum) {
-					<td data-label="Album"><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
+					<td class="album-cell" data-label="Album"><a [routerLink]="['/album', track.album.id]">{{ track.album.name }}</a></td>
 				}
 			</tr>
 			}

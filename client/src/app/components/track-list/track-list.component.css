@@ -4,53 +4,96 @@
 	overflow-x: auto;
 	border: 1px solid var(--app-border);
 	border-radius: 14px;
+	background: #12181d;
 }
 
-table {
+.track-table {
 	width: 100%;
 	min-width: 680px;
-	margin: 0;
-	color: var(--dark);
+	border-collapse: collapse;
+	color: var(--app-text);
+	background: #12181d;
 }
 
-th,
+thead {
+	background: #0f1418;
+}
+
+th {
+	padding: 0.65rem 0.7rem;
+	border-bottom: 1px solid var(--app-border);
+	color: var(--app-muted);
+	font-size: 0.67rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-align: left;
+	text-transform: uppercase;
+}
+
 td {
-	padding: 0.75rem;
+	padding: 0.82rem 0.7rem;
+	border-bottom: 1px solid rgba(48, 58, 66, 0.72);
+	color: var(--app-muted);
 	vertical-align: middle;
 }
 
-td a {
-	font-weight: 700;
-	overflow-wrap: anywhere;
-}
-
-tbody tr > * {
+tbody tr {
 	transition: background-color 160ms ease;
 }
 
-tbody tr:hover > * {
-	--bs-table-accent-bg: rgba(30, 215, 96, 0.1);
+tbody tr:hover {
+	background: #192127;
 }
 
-th:first-child,
-td:first-child {
-	width: 3rem;
+tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+td a {
+	color: inherit;
+	font-weight: 600;
+	text-decoration: none;
+	text-underline-offset: 0.2em;
+	overflow-wrap: anywhere;
+}
+
+td a:hover {
+	color: var(--app-accent-hover);
+	text-decoration: underline;
+}
+
+.rank-heading,
+.rank-cell {
+	width: 3.6rem;
+}
+
+.rank-cell {
+	color: #758089;
+	font-size: 0.78rem;
+	font-variant-numeric: tabular-nums;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+.track-cell a {
+	color: var(--app-text);
+	font-weight: 750;
+}
+
+.duration-cell {
+	font-variant-numeric: tabular-nums;
+	white-space: nowrap;
 }
 
 @container track-list (max-width: 720px) {
 	.track-table-wrap {
-		overflow: hidden;
+		overflow: visible;
 	}
 
-	table,
-	tbody,
-	tr,
-	td {
+	.track-table,
+	tbody {
 		display: block;
 		width: 100%;
-	}
-
-	table {
 		min-width: 0;
 	}
 
@@ -60,9 +103,14 @@ td:first-child {
 
 	tbody tr {
 		display: grid;
-		grid-template-columns: minmax(7.5rem, 0.38fr) minmax(0, 1fr);
-		padding: 0.65rem 0.85rem;
-		border-bottom: 1px solid #c6c9cb;
+		grid-template-areas:
+			"rank track duration"
+			"rank artist artist"
+			"rank album album";
+		grid-template-columns: 2.35rem minmax(0, 1fr) auto;
+		gap: 0.18rem 0.55rem;
+		padding: 0.82rem 0.25rem;
+		border-bottom: 1px solid rgba(48, 58, 66, 0.72);
 	}
 
 	tbody tr:last-child {
@@ -71,27 +119,54 @@ td:first-child {
 
 	td,
 	td:first-child {
-		display: grid;
-		grid-column: 1 / -1;
-		grid-template-columns: subgrid;
-		width: 100%;
-		padding: 0.42rem 0;
+		display: block;
+		width: auto;
+		padding: 0;
 		border: 0;
 	}
 
-	td::before {
-		content: attr(data-label);
-		color: #46515a;
-		font-size: 0.7rem;
-		font-weight: 900;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+	.rank-cell {
+		grid-area: rank;
+		padding-top: 0.13rem;
+	}
+
+	.track-cell {
+		grid-area: track;
+		min-width: 0;
+		line-height: 1.35;
+	}
+
+	.duration-cell {
+		grid-area: duration;
+		padding-top: 0.12rem;
+		font-size: 0.82rem;
+	}
+
+	.artist-cell {
+		grid-area: artist;
+	}
+
+	.album-cell {
+		grid-area: album;
+	}
+
+	.artist-cell,
+	.album-cell {
+		color: #89959d;
+		font-size: 0.78rem;
+		line-height: 1.35;
+	}
+
+	.artist-cell::before,
+	.album-cell::before {
+		content: attr(data-label) " · ";
+		color: #65717a;
 	}
 }
 
 @supports not (container-type: inline-size) {
 	@media (max-width: 760px) {
-		table {
+		.track-table {
 			min-width: 680px;
 		}
 	}
