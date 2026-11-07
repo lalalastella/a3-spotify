@@ -15,6 +15,8 @@ export class SearchComponent implements OnInit {
   searchCategory:string = 'artist';
   searchCategories:string[] = ['artist', 'album', 'track'];
   resources:ResourceData[];
+  isLoading:boolean = false;
+  errorMessage:string = null;
 
   constructor(private spotifyService:SpotifyService) { }
 
@@ -25,11 +27,19 @@ export class SearchComponent implements OnInit {
     const query = this.searchString ? this.searchString.trim() : '';
     if(!query) {
       this.resources = [];
+      this.errorMessage = 'Enter an artist, album, or track to start searching.';
       return;
     }
     this.resources = null;
+    this.errorMessage = null;
+    this.isLoading = true;
     this.spotifyService.searchFor(this.searchCategory, query).then((resources) => {
       this.resources = resources;
+      this.isLoading = false;
+    }).catch(() => {
+      this.resources = [];
+      this.errorMessage = 'Search could not be completed. Check your Spotify login and try again.';
+      this.isLoading = false;
     });
   }
 

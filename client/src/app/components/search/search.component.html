@@ -8,22 +8,37 @@
 				<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder=" " autocomplete="off">
 				<label for="spotify-search">Try an artist or song</label>
 			</div>
-			<select id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null" aria-label="Search category">
+			<select id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null; errorMessage = null" aria-label="Search category">
 				@for(category of searchCategories; track category) {
 					<option [value]="category">{{ category }}</option>
 				}
 			</select>
-			<button type="submit" class="btn btn-light">Search</button>
+			<button type="submit" class="btn btn-light" [disabled]="isLoading">
+				@if(isLoading) { <span class="button-spinner" aria-hidden="true"></span> Searching } @else { Search }
+			</button>
 		</div>
 	</form>
-	<div class="results" aria-live="polite">
-		@if(resources && resources.length === 0) {
+	<div class="results" aria-live="polite" [attr.aria-busy]="isLoading">
+		@if(isLoading) {
+			<div class="skeleton-results" aria-label="Loading search results">
+				@if(searchCategory === 'track') {
+					@for(row of [1, 2, 3, 4]; track row) { <span class="skeleton-row"></span> }
+				} @else {
+					<span class="skeleton-cover"></span>
+					<span class="skeleton-title"></span>
+				}
+			</div>
+		}
+		@if(!isLoading && errorMessage) {
+			<p class="status-message is-error" role="alert">{{ errorMessage }}</p>
+		}
+		@if(!isLoading && !errorMessage && resources && resources.length === 0) {
 			<p class="empty-state">No results yet. Try a different search term.</p>
 		}
-		@if(resources && resources.length > 0 && searchCategory !== 'track') {
+		@if(!isLoading && resources && resources.length > 0 && searchCategory !== 'track') {
 			<app-carousel [resources]="resources" carouselId="searchCarousel"></app-carousel>
 		}
-		@if(resources && resources.length > 0 && searchCategory === 'track') {
+		@if(!isLoading && resources && resources.length > 0 && searchCategory === 'track') {
 			<app-track-list [tracks]="tracks"></app-track-list>
 		}
 	</div>

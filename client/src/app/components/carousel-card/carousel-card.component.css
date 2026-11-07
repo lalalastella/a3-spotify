@@ -2,12 +2,15 @@ a {
 	display: block;
 	position: relative;
 	min-height: 280px;
+	overflow: hidden;
 	color: white;
+	text-decoration: none;
 }
 
 img {
 	aspect-ratio: 1;
 	object-fit: cover;
+	transition: transform 280ms ease, filter 280ms ease;
 }
 
 .carousel-caption {
@@ -37,4 +40,16 @@ img {
 	font-weight: 900;
 	line-height: 1.15;
 	text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+	transition: transform 220ms ease;
+}
+
+@media (hover: hover) {
+	a:hover img {
+		transform: scale(1.025);
+		filter: saturate(1.06);
+	}
+
+	a:hover .carousel-caption h5 {
+		transform: translateY(-2px);
+	}
 }

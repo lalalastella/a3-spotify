@@ -24,6 +24,14 @@ td a {
 	overflow-wrap: anywhere;
 }
 
+tbody tr > * {
+	transition: background-color 160ms ease;
+}
+
+tbody tr:hover > * {
+	--bs-table-accent-bg: rgba(30, 215, 96, 0.1);
+}
+
 th:first-child,
 td:first-child {
 	width: 3rem;

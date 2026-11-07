@@ -13,7 +13,8 @@ var my_client_secret = null;
 
 var access_token = null;
 var refresh_token = null;
-var client_uri = 'http://localhost:4200';
+var client_uri = 'http://127.0.0.1:4200';
+var login_success_uri = client_uri + '/?login=success';
 
 function refresh() {
 	const params = new URLSearchParams();
@@ -41,6 +42,11 @@ function refresh() {
 }
 
 function makeAPIRequest(url, res) {
+	if(!access_token) {
+		res.status(401).json({error: 'Not authenticated'});
+		return;
+	}
+
 	var headers = {
 		'Content-Type':'application/x-www-form-urlencoded',
 		'Authorization': 'Bearer ' + access_token
@@ -133,10 +139,18 @@ router.get('/callback', function(req, res, next) {
 			access_token = json.access_token;
 			refresh_token = json.refresh_token;
 			fs.writeFile('tokens.json', JSON.stringify({access_token: access_token, refresh_token: refresh_token}), () => {
-				res.redirect(client_uri);
+				res.redirect(login_success_uri);
 			});
 		}).catch(err => console.error(err));
 	}
+});
+
+router.get('/logout', function(req, res, next) {
+	access_token = null;
+	refresh_token = null;
+	fs.writeFile('tokens.json', JSON.stringify({access_token: null, refresh_token: null}), () => {
+		res.redirect(client_uri);
+	});
 });
 
 router.get('/me', function(req, res, next) {

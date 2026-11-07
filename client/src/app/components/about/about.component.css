@@ -37,3 +37,9 @@
 .profile-link {
     font-weight: 700;
 }
+
+.profile-error {
+    margin: -0.5rem 0 1.25rem;
+    color: #ffc0c0;
+    font-size: 0.9rem;
+}

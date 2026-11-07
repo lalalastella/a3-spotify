@@ -8,7 +8,16 @@
   </a>
   <div class="nav-actions">
     <a class="favorites-nav" routerLink="/favorites">Favorites</a>
-    <a class="btn btn-light login-button" href="http://127.0.0.1:8888/login">Log in</a>
+    @if(authState.connected$ | async) {
+      <div class="account-controls">
+        @if(authState.profile$ | async; as profile) {
+          <img class="nav-avatar" [src]="profile.imageURL" [alt]="profile.name + ' profile picture'">
+        }
+        <a class="logout-link" href="http://127.0.0.1:8888/logout" (click)="authState.clear()">Log out</a>
+      </div>
+    } @else {
+      <a class="btn btn-light login-button" href="http://127.0.0.1:8888/login">Log in</a>
+    }
   </div>
 </nav>
 <main class="container-fluid app-shell">

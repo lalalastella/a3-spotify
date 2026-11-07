@@ -67,6 +67,38 @@
 	margin-left: 1rem;
 }
 
+.account-controls {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	min-height: 42px;
+	margin-left: 0.65rem;
+	padding: 0.25rem 0.35rem 0.25rem 0.25rem;
+	border: 1px solid rgba(30, 215, 96, 0.36);
+	border-radius: 999px;
+	background: rgba(30, 215, 96, 0.08);
+}
+
+.nav-avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	object-fit: cover;
+	box-shadow: 0 0 0 2px rgba(30, 215, 96, 0.4);
+}
+
+.logout-link {
+	padding: 0.35rem 0.55rem 0.35rem 0;
+	color: var(--app-text);
+	font-size: 0.78rem;
+	font-weight: 800;
+	text-decoration: none;
+}
+
+.logout-link:hover {
+	color: var(--app-accent-hover);
+}
+
 .nav-actions {
 	display: flex;
 	align-items: center;
@@ -96,5 +128,9 @@
 
 	.login-button {
 		margin-left: 0;
+	}
+
+	.logout-link {
+		display: none;
 	}
 }

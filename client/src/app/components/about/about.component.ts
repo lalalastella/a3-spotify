@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
+import { AuthStateService } from '../../services/auth-state.service';
 
 @Component({
     selector: 'app-about',
@@ -11,18 +12,32 @@ export class AboutComponent implements OnInit {
   name:string = null;
   profile_pic:string = "assets/default-profile.svg";
   profile_link:string = null;
+  isLoading:boolean = false;
+  errorMessage:string = null;
 
 
-  constructor(private spotifyService:SpotifyService) { }
+  constructor(private spotifyService:SpotifyService, private authState:AuthStateService) { }
 
   ngOnInit() {
+    const loginSucceeded = new URLSearchParams(window.location.search).get('login') === 'success';
+    if(loginSucceeded || this.authState.isConnected) {
+      this.loadProfile();
+    }
   }
 
   loadProfile() {
+    this.isLoading = true;
+    this.errorMessage = null;
     this.spotifyService.aboutMe().then((profile) => {
       this.name = profile.name;
       this.profile_pic = profile.imageURL;
       this.profile_link = profile.spotifyProfile;
+      this.authState.setProfile({ name: profile.name, imageURL: profile.imageURL });
+      this.isLoading = false;
+    }).catch(() => {
+      this.authState.clear();
+      this.errorMessage = 'Profile could not be loaded. Log in to Spotify and try again.';
+      this.isLoading = false;
     });
   }
 
