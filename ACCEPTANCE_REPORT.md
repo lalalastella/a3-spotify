@@ -57,9 +57,9 @@ the submitted ZIP.
 
 ## Submission blockers
 
-The implementation is complete locally, but delivery is not complete until it
-is reconciled with the shared GitHub Classroom/team repository. No remote was
-connected and no code was pushed.
+The implementation is committed and pushed to the private repository
+`lalalastella/inf133-a3-spotify`. This is a normal private repository, not the
+course GitHub Classroom/team repository, and no collaborator has been invited.
 
 The README and final ZIP also require one user-supplied fact:
 
