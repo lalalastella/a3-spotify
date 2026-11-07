@@ -31,6 +31,14 @@ export class AuthStateService {
     localStorage.setItem(this.sessionModeKey, 'true');
   }
 
+  markSessionConnected() {
+    this.enableSessionMode();
+    this.connectedSubject.next(true);
+    this.profileSubject.next(null);
+    localStorage.setItem(this.storageKey, 'true');
+    localStorage.removeItem(this.profileStorageKey);
+  }
+
   setProfile(profile:ConnectedProfile) {
     this.connectedSubject.next(true);
     this.profileSubject.next(profile);

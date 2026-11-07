@@ -22,10 +22,8 @@ export class AboutComponent implements OnInit {
   ngOnInit() {
     const loginSucceeded = new URLSearchParams(window.location.search).get('login') === 'success';
     if(loginSucceeded) {
-      this.authState.enableSessionMode();
-    }
-    if(loginSucceeded || this.authState.isConnected) {
-      this.loadProfile();
+      this.authState.markSessionConnected();
+      window.history.replaceState({}, '', window.location.pathname);
     }
   }
 
