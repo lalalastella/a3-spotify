@@ -63,15 +63,18 @@ the final browser acceptance run. `/me`, all three search categories, and the
 Artist, Album, and Track routes passed; the browser console recorded zero
 errors. Canvas course data and the dummy server are not included in this repo.
 
-## Submission blockers
+## Repository and submission status
 
-The implementation is committed and pushed to the private repository
-`lalalastella/inf133-a3-spotify`. This is a normal private repository, not the
-course GitHub Classroom/team repository, and no collaborator has been invited.
+The implementation is committed and pushed to `lalalastella/a3-spotify`, a
+verified GitHub fork of the instructor repository
+`travislindenreid/a3-spotify`. The instructor's `master` history and the full
+TuneCrate implementation history are both retained. `TracyZexiChen` has been
+invited to the fork with Write permission; accepting the invitation does not
+change the authorship of Stella's existing commits.
 
 The README and final ZIP still require one user-supplied fact:
 
 1. Total hours to report.
 
-Both partners must separately complete the Canvas partner survey. Only one
-partner needs to upload the ZIP.
+Every group member must separately complete the Canvas partner survey. Only one
+group member needs to upload the ZIP.
