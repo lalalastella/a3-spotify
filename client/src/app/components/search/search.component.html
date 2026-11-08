@@ -1,12 +1,77 @@
-<h1>Search Spotify</h1>
-<!--TODO: bind input's model to searchString-->
-<input>
-<!--TODO: bind select's model to searchCategory-->
-<select>
-	<!--TODO: loop over searchCategories to create dropdown options-->
-	<!--populate body and text value https://www.w3schools.com/tags/att_option_selected.asp-->
-</select>
-<!--TODO: Call search function when the button is clicked-->
-<button class="btn btn-light">Search</button>
-<!--TODO: Display a carousel component if searching for an artist or album. Bind carousel's resources and give it a static carouselId.-->
-<!--TODO: Display a track-list component if searching for a track. Bind track-list's tracks.-->
+<section class="panel search-panel" aria-labelledby="search-heading">
+	<p class="eyebrow">Artists, albums & tracks</p>
+	<h1 id="search-heading">Search Spotify</h1>
+	<p class="search-intro">Choose what you want to find, then explore the matching catalog.</p>
+	<form class="search-form" (ngSubmit)="search()">
+		<div class="search-controls">
+			<div class="floating-field">
+				<input id="spotify-search" type="search" name="searchString" [(ngModel)]="searchString" placeholder=" " autocomplete="off">
+				<label for="spotify-search">Try an artist or song</label>
+			</div>
+			<select class="native-category-select" id="search-category" name="searchCategory" [(ngModel)]="searchCategory" (ngModelChange)="resources = null; errorMessage = null" aria-hidden="true" tabindex="-1">
+				@for(category of searchCategories; track category) {
+					<option [value]="category">{{ category }}</option>
+				}
+			</select>
+			<div class="category-picker" (click)="$event.stopPropagation()">
+				<button
+					type="button"
+					class="category-trigger"
+					[attr.aria-label]="'Search category: ' + searchCategory"
+					[attr.aria-expanded]="isCategoryMenuOpen"
+					aria-controls="category-menu"
+					aria-haspopup="listbox"
+					(click)="toggleCategoryMenu()"
+					(keydown)="onCategoryTriggerKeydown($event)">
+					<span class="category-icon" aria-hidden="true">{{ categoryIcon(searchCategory) }}</span>
+					<span>{{ searchCategory }}</span>
+					<span class="category-chevron" aria-hidden="true"></span>
+				</button>
+				@if(isCategoryMenuOpen) {
+					<div class="category-menu" id="category-menu" role="listbox" aria-label="Search category">
+						@for(category of searchCategories; track category) {
+							<button
+								type="button"
+								class="category-option"
+								[class.is-selected]="searchCategory === category"
+								[attr.aria-selected]="searchCategory === category"
+								role="option"
+								(click)="selectCategory(category)">
+								<span class="option-check" aria-hidden="true">{{ searchCategory === category ? '✓' : '' }}</span>
+								<span class="category-icon" aria-hidden="true">{{ categoryIcon(category) }}</span>
+								<span>{{ category }}</span>
+							</button>
+						}
+					</div>
+				}
+			</div>
+			<button type="submit" class="btn btn-light" [disabled]="isLoading">
+				@if(isLoading) { <span class="button-spinner" aria-hidden="true"></span> Searching } @else { Search }
+			</button>
+		</div>
+	</form>
+	<div class="results" aria-live="polite" [attr.aria-busy]="isLoading">
+		@if(isLoading) {
+			<div class="skeleton-results" aria-label="Loading search results">
+				@if(searchCategory === 'track') {
+					@for(row of [1, 2, 3, 4]; track row) { <span class="skeleton-row"></span> }
+				} @else {
+					<span class="skeleton-cover"></span>
+					<span class="skeleton-title"></span>
+				}
+			</div>
+		}
+		@if(!isLoading && errorMessage) {
+			<p class="status-message is-error" role="alert">{{ errorMessage }}</p>
+		}
+		@if(!isLoading && !errorMessage && resources && resources.length === 0) {
+			<p class="empty-state">No results yet. Try a different search term.</p>
+		}
+		@if(!isLoading && resources && resources.length > 0 && searchCategory !== 'track') {
+			<app-carousel [resources]="resources" carouselId="searchCarousel"></app-carousel>
+		}
+		@if(!isLoading && resources && resources.length > 0 && searchCategory === 'track') {
+			<app-track-list [tracks]="tracks"></app-track-list>
+		}
+	</div>
+</section>

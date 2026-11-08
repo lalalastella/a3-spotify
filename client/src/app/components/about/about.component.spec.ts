@@ -5,7 +5,7 @@ describe('AboutComponent', () => {
   let component: AboutComponent;
   let fixture: ComponentFixture<AboutComponent>;
 
-  beforeEach(waitForAsync(() => {  //  waitForAsync 
+  beforeEach(waitForAsync(() => {  // waitForAsync
     TestBed.configureTestingModule({
       declarations: [ AboutComponent ]
     })

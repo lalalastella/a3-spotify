@@ -1,10 +1,66 @@
-.progress {
-	margin: 10px;
-	height: 20px;
-	overflow: visible;
+:host {
+	display: block;
+	margin: 0.7rem 0 1.8rem;
 }
 
-.progress-bar .progress-bar-text {
-  position: absolute;
-  text-shadow: 0px 0px 4px #444;
+.popularity-meter {
+	width: 100%;
+}
+
+.meter-heading {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 0.55rem;
+}
+
+.meter-label,
+.meter-score {
+	margin: 0;
+}
+
+.meter-label {
+	color: var(--app-text);
+	font-size: 0.88rem;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+}
+
+.meter-score {
+	color: var(--app-accent);
+	font-size: 1.15rem;
+	font-variant-numeric: tabular-nums;
+	font-weight: 800;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.meter-track {
+	height: 5px;
+	padding: 0;
+	overflow: hidden;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.14);
+}
+
+.meter-fill {
+	position: relative;
+	height: 100%;
+	border-radius: inherit;
+	background: var(--app-accent);
+}
+
+.meter-scale {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.35rem;
+	color: var(--app-muted);
+	font-size: 0.61rem;
+	font-variant-numeric: tabular-nums;
+	opacity: 0.72;
+}
+
+@media (max-width: 420px) {
+	:host { margin-bottom: 1.5rem; }
 }

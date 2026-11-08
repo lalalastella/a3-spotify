@@ -1,4 +1,60 @@
-.progress {
-	margin: 10px;
-	height: 20px;
+.track-layout {
+	display: grid;
+	grid-template-areas:
+		"back back"
+		"title stats"
+		"details stats"
+		"actions stats";
+	grid-template-columns: minmax(300px, 0.9fr) minmax(320px, 1.1fr);
+	column-gap: clamp(2rem, 6vw, 5rem);
+	row-gap: 1rem;
+	align-items: start;
+}
+
+.back-link {
+	grid-area: back;
+}
+
+.track-title {
+	grid-area: title;
+	margin-bottom: 0;
+}
+
+.track-stats {
+	grid-area: stats;
+	padding-top: 0.45rem;
+}
+
+.track-details {
+	grid-area: details;
+}
+
+.track-details p {
+	margin: 0 0 0.55rem;
+	color: var(--app-muted);
+}
+
+.track-actions {
+	grid-area: actions;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 0.8rem;
+}
+
+@media (max-width: 700px) {
+	.track-layout {
+		grid-template-areas:
+			"back"
+			"title"
+			"stats"
+			"details"
+			"actions";
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 1.15rem;
+	}
+
+	.track-stats {
+		padding-top: 0;
+	}
 }

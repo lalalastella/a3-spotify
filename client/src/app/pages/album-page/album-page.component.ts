@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistData } from '../../data/artist-data';
 import { TrackData } from '../../data/track-data';
 import { AlbumData } from '../../data/album-data';
+import { SpotifyService } from '../../services/spotify.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
     selector: 'app-album-page',
@@ -14,13 +15,22 @@ export class AlbumPageComponent implements OnInit {
 	albumId:string;
 	album:AlbumData;
 	tracks:TrackData[];
+	isSaved = false;
 
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private spotifyService:SpotifyService, private favoritesService:FavoritesService) { }
 
   ngOnInit() {
     this.albumId = this.route.snapshot.paramMap.get('id');
-    //TODO: inject spotifyService and use it to get the album data and the tracks for the album
+    this.spotifyService.getAlbum(this.albumId).then((album) => {
+      this.album = album;
+      this.isSaved = this.favoritesService.isFavorite(album);
+    });
+    this.spotifyService.getTracksForAlbum(this.albumId).then((tracks) => this.tracks = tracks);
+  }
+
+  toggleFavorite() {
+    this.isSaved = this.favoritesService.toggle(this.album);
   }
 
 }

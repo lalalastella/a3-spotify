@@ -1,6 +1,23 @@
-<div class="progress">
-	<!--TODO: set style.background-color based on the level of popularity and style.width via the popularity's percent. Display percent.-->
-  <div class="progress-bar" role="progressbar">
-  	<span class="progress-bar-text">???: ???</span>
+<section class="popularity-meter" [attr.aria-label]="label + ': ' + popularity.percentageString">
+  <div class="meter-heading">
+    <p class="meter-label">{{ label }}</p>
+    <p class="meter-score">{{ displayedPercentageString }}</p>
   </div>
-</div>
+
+  <div class="progress meter-track">
+    <div
+      class="progress-bar meter-fill"
+      role="progressbar"
+      [style.width.%]="displayedPercent"
+      [attr.aria-label]="label"
+      [attr.aria-valuenow]="displayedPercent"
+      aria-valuemin="0"
+      aria-valuemax="100">
+    </div>
+  </div>
+
+  <div class="meter-scale" aria-hidden="true">
+    <span>0</span>
+    <span>100</span>
+  </div>
+</section>

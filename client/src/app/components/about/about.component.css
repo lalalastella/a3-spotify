@@ -1,3 +1,45 @@
+.profile-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-panel h1 {
+    margin-bottom: 1.25rem;
+}
+
 .profile {
-    max-width: 400px;
+    display: block;
+    width: min(220px, 65vw);
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 0 1.25rem;
+    border: 5px solid rgba(30, 215, 96, 0.16);
+    box-shadow: 0 0 0 1px var(--app-border), 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+
+.profile-panel h3 {
+    margin-bottom: 1.5rem;
+    color: var(--app-muted);
+    font-size: 1.05rem;
+    letter-spacing: 0;
+}
+
+.profile-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.profile-link {
+    font-weight: 700;
+}
+
+.profile-error {
+    margin: -0.5rem 0 1.25rem;
+    color: #ffc0c0;
+    font-size: 0.9rem;
 }

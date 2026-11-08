@@ -4,17 +4,39 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var session = require('express-session');
+var fs = require('fs');
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
-//Specify that connections from localhost:4200 (the client app) are allowed
-app.use(cors('http://localhost:4200'));
+var credentials = JSON.parse(fs.readFileSync(path.join(__dirname, 'client_secret.json'), 'utf8'));
+var sessionSecret = process.env.SESSION_SECRET || credentials.client_secret;
+
+// Allow the Angular client to send its per-browser session cookie.
+app.use(cors({
+  origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
+  credentials: true
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+// The default MemoryStore is sufficient for this local coursework demo. It
+// intentionally clears all login sessions whenever the server restarts.
+app.use(session({
+  name: 'tunecrate.sid',
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    sameSite: 'lax',
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24
+  }
+}));
 
 app.use('/', indexRouter);
 

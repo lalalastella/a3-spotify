@@ -1,3 +1,82 @@
+.album-layout {
+	display: grid;
+	grid-template-areas:
+		"back back"
+		"title tracks"
+		"image tracks"
+		"stats tracks"
+		"meta tracks"
+		"actions tracks";
+	grid-template-columns: minmax(300px, 0.9fr) minmax(420px, 1.1fr);
+	column-gap: clamp(2rem, 5vw, 4rem);
+	row-gap: 1rem;
+	align-items: start;
+}
+
+.back-link {
+	grid-area: back;
+}
+
+.album-title {
+	grid-area: title;
+	margin-bottom: 0;
+}
+
+.album-stats {
+	grid-area: stats;
+}
+
 #albumImg {
-	max-width: 400px;
+	grid-area: image;
+	display: block;
+	width: min(100%, 400px);
+	aspect-ratio: 1;
+	object-fit: cover;
+	border-radius: var(--app-radius);
+	box-shadow: var(--app-shadow);
+}
+
+.album-meta {
+	grid-area: meta;
+}
+
+.album-meta p {
+	margin: 0;
+	color: var(--app-muted);
+}
+
+.resource-actions {
+	grid-area: actions;
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 0.8rem;
+}
+
+.album-tracks {
+	grid-area: tracks;
+	min-width: 0;
+}
+
+.album-tracks h3 {
+	margin-bottom: 0.75rem;
+}
+
+@media (max-width: 850px) {
+	.album-layout {
+		grid-template-areas:
+			"back"
+			"title"
+			"stats"
+			"image"
+			"meta"
+			"actions"
+			"tracks";
+		grid-template-columns: minmax(0, 1fr);
+		row-gap: 1.15rem;
+	}
+
+	.album-tracks {
+		margin-top: 0.75rem;
+	}
 }

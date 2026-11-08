@@ -1,10 +1,25 @@
-<!--TODO: Define click callback to load about me information-->
-<button class="btn btn-light">Load info about me</button>
-<!--TODO: replace ??? to bind to name-->
-<h3>Logged in user: ???</h3>
-<!--TODO: bind img src's to profile_pic-->
-<img src="assets/unknown.jpg" class="profile">
-<p>
-	<!--TODO: bind link's href to profile_link-->
-	<a class="btn btn-light" target="_blank">Open profile on Spotify</a>	
-</p>
+<section class="panel profile-panel" aria-labelledby="profile-heading" [attr.aria-busy]="isLoading">
+	<p class="eyebrow">Your listening identity</p>
+	<h1 id="profile-heading">Spotify profile</h1>
+	<img [src]="profile_pic" class="profile" [alt]="name ? name + ' Spotify profile picture' : 'Default profile picture'">
+	@if(name) {
+		<h3>Logged in user: {{ name }}</h3>
+	} @else if(loginRequired) {
+		<h3>Spotify account not connected</h3>
+	} @else {
+		<h3>Load your profile to get started</h3>
+	}
+	@if(errorMessage) { <p class="profile-error" role="alert">{{ errorMessage }}</p> }
+	<div class="profile-actions">
+		@if(loginRequired) {
+			<a class="btn btn-light" href="http://127.0.0.1:8888/login">Log in to Spotify</a>
+		} @else if(!name) {
+			<button class="btn btn-light" (click)="loadProfile()" [disabled]="isLoading">
+				@if(isLoading) { Loading profile… } @else { Load info about me }
+			</button>
+		}
+		@if(profile_link) {
+			<a class="profile-link" [href]="profile_link" target="_blank" rel="noopener noreferrer">Open profile on Spotify <span aria-hidden="true">↗</span></a>
+		}
+	</div>
+</section>

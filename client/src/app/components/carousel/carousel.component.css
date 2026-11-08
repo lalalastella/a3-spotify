@@ -1,7 +1,21 @@
 .carousel {
-	width: 400px;
+	width: min(100%, 520px);
+	overflow: hidden;
+	border: 1px solid var(--app-border);
+	border-radius: 16px;
+	background: #0f1418;
 }
 
-app-artist {
-	vertical-align: middle;
+.carousel-control-prev,
+.carousel-control-next {
+	width: 16%;
+	min-width: 48px;
+	cursor: pointer;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+	padding: 1rem;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0.72);
 }

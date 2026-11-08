@@ -17,4 +17,8 @@ export class TrackListComponent implements OnInit {
   ngOnInit() {
   }
 
+	formatRank(index:number):string {
+		return (index + 1).toString().padStart(2, '0');
+	}
+
 }
