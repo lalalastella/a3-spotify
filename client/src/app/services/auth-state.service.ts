@@ -78,8 +78,7 @@ export class AuthStateService {
         this.clear();
       }
     } catch {
-      // The required Canvas dummy server intentionally has no /session route.
-      // A stopped/restarted bonus server likewise has no usable OAuth session.
+      // No /session route (dummy server) or server restarted: treat as logged out.
       this.clear();
     }
   }

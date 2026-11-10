@@ -14,7 +14,7 @@ var app = express();
 var credentials = JSON.parse(fs.readFileSync(path.join(__dirname, 'client_secret.json'), 'utf8'));
 var sessionSecret = process.env.SESSION_SECRET || credentials.client_secret;
 
-// Allow the Angular client to send its per-browser session cookie.
+// Let the Angular client send its login cookie.
 app.use(cors({
   origin: ['http://localhost:4200', 'http://127.0.0.1:4200'],
   credentials: true
@@ -23,8 +23,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// The default MemoryStore is sufficient for this local coursework demo. It
-// intentionally clears all login sessions whenever the server restarts.
+// Each browser gets its own session. Sessions are cleared when the server restarts.
 app.use(session({
   name: 'tunecrate.sid',
   secret: sessionSecret,

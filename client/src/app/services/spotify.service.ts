@@ -19,19 +19,13 @@ export class SpotifyService {
   private sendRequestToExpress(endpoint:string):Promise<any> {
     const uri:string = this.expressBaseUrl + endpoint;
 
-    //firstValueFrom generates a Promise for whatever is returned first from the GET request.
-    //You shouldn't need to update this part.
-    // The Canvas dummy server needs ordinary requests; credentials are enabled
-    // only after the included OAuth server creates a per-browser session.
+    // Normal request (dummy server). Cookies are only sent after a real Spotify login.
     if(!this.authState.sessionMode) {
       return firstValueFrom(this.http.get(uri));
     }
 
     return firstValueFrom(this.http.get(uri, {withCredentials: true})).catch((error) => {
-      // A saved OAuth state can outlive the real server. The course dummy
-      // server uses Access-Control-Allow-Origin: * and therefore rejects a
-      // credentialed CORS request. Retry once as the rubric's anonymous flow;
-      // if that succeeds, remove the stale real-server login indicator.
+      // If the real server is gone, try again without cookies and forget the old login.
       if(error?.status !== 0) {
         throw error;
       }

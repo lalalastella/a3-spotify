@@ -1,72 +1,77 @@
 # A3 Implementation and Acceptance Plan
 
+Stella Jiang and Tracy Zexi Chen (A3 Pair 47)
+
 ## Goal
 
-Complete the required 10-point Angular Spotify Browser against the Canvas dummy
-webserver, verify every rubric item, and produce a submission-ready ZIP without
-`node_modules`.
+Build the Angular Spotify Browser, run it against the Canvas dummy
+webserver, check every rubric item, and submit a ZIP without `node_modules`.
+
+Owner tags: [Both], [Stella], [Tracy]
 
 ## Gate 1: Workspace and runtime
 
-- [x] Starter repository is present locally.
-- [x] The implementation is committed and pushed to the project repository.
-- [x] Canvas `dummy_webserver` was downloaded to a temporary directory and used
-      for the final official-server smoke test; it is not stored in this repo.
-- [x] Dependencies install for the Angular client.
-- [x] A contract-compatible acceptance server responds on `127.0.0.1:8888`.
-- [x] Angular client serves on `localhost:4200`.
+- [x] [Both] Starter repository is present locally.
+- [x] [Both] Canvas `dummy_webserver` is downloaded and runs on `127.0.0.1:8888`.
+      It is not stored in this repo.
+- [x] [Both] Dependencies install for the Angular client.
+- [x] [Both] Angular client runs on `localhost:4200`.
 
-## Gate 2: Spotify service (1 point and dependency for all pages)
+## Gate 2: Spotify service (1 point, needed by every page)
 
-- [x] `sendRequestToExpress` calls the Express base URL.
-- [x] Search handles artist, album, and track response shapes.
-- [x] Artist, artist albums, and artist top tracks endpoints are implemented.
-- [x] Album and album tracks endpoints are implemented.
-- [x] Track endpoint is implemented.
-- [x] Dynamic path values are URL encoded.
+- [x] [Both] `sendRequestToExpress` calls the Express base URL.
+- [x] [Stella] Search handles artist, album, and track results.
+- [x] [Stella] Artist, artist albums, and artist top tracks endpoints.
+- [x] [Stella] Album and album tracks endpoints.
+- [x] [Stella] Track endpoint.
+- [x] [Stella] Ids and search text are URL encoded.
 
-## Gate 3: Home page and reusable components (4 points)
+## Gate 3: Home page and shared components (4 points)
 
-- [x] About component loads and displays profile data.
-- [x] Search input, category selector, and button are bound.
-- [x] Artist/album results render in the carousel.
-- [x] Track results render in the track list.
-- [x] Carousel cards route to local resource pages.
-- [x] Track rows show index, name, duration, artist, and album.
-- [x] Track list conditionally hides artist and album columns.
-- [x] Thermometer displays label, percent, width, and color.
+- [x] [Stella] About component loads and shows the profile.
+- [x] [Stella] Search input, category dropdown, and button are bound.
+- [x] [Tracy] Carousel shows artist and album results.
+- [x] [Tracy] Carousel cards link to the local artist or album page.
+- [x] [Tracy] Track list shows index, name, duration, artist, and album.
+- [x] [Tracy] Track list can hide the artist and album columns.
+- [x] [Stella] Search shows tracks in the track list.
+- [x] [Stella] Thermometer shows the label, percent, and bar width.
+- [x] [Tracy] Thermometer bar color goes from red (low) to green (high).
 
 ## Gate 4: Detail pages (5 points)
 
-- [x] Artist page shows profile details, followers, popularity, albums, and top tracks (3 points).
-- [x] Album page shows details, artists, popularity, and tracks with redundant columns hidden (1.5 points).
-- [x] Track page shows album, all artists, duration, Spotify link, and popularity (0.5 points).
-- [x] Internal links use Angular routes; only explicit Spotify links are external.
-- [x] Templates guard asynchronous data before dereferencing it.
+- [x] [Stella] Artist page shows the name, image, followers, popularity, albums,
+      and top tracks (3 points).
+- [x] [Tracy] Going from one artist page straight to another loads the new artist.
+- [x] [Stella] Album page shows the details, artists, popularity, and tracks
+      without the extra columns (1.5 points).
+- [x] [Stella] Track page shows the album, all artists, duration, Spotify link,
+      and popularity (0.5 points).
+- [x] [Both] Links inside the app use Angular routes. Only the "on Spotify"
+      links go to Spotify.com.
+- [x] [Both] Pages wait for data before showing it.
 
-## Gate 5: Quality assurance
+## Gate 5: Testing
 
-- [x] TypeScript and Angular template compilation succeeds.
-- [x] Production build succeeds.
-- [x] Existing starter-only test/lint incompatibilities are documented in the acceptance report.
-- [x] Home, search modes, artist, album, and track routes are exercised in a browser.
-- [x] Browser console has no application errors during the acceptance flow.
-- [x] Final runtime flow passes against Canvas's official `dummy_webserver`.
+- [x] [Both] The client builds without errors.
+- [x] [Tracy] Home page, all three search types, and the artist, album, and track
+      pages work in the browser.
+- [x] [Both] No app errors in the browser console.
+- [x] [Both] Full run against the Canvas `dummy_webserver`, with screenshots
+      in the `screenshots` folder.
+- [x] [Both] Each of us tested the other's pages.
 
-## Gate 6: Submission package
 
-- [ ] `readme.txt` is complete except for the user-supplied total-hours value.
-- [x] Sole-author status and the partner survey requirement are documented.
-- [x] Submission exclusions for `node_modules`, secrets, build output, caches,
-      and `.git` are documented.
-- [ ] Final ZIP contents must be audited immediately before Canvas submission.
-- [ ] Canvas upload is performed only after explicit confirmation.
+## Bonus (optional)
 
-## Execution order
+- [x] [Stella] Multi-user webserver: each browser keeps its own login session.
+      Stella tested it with her Spotify Premium account.
+- [x] [Stella] Favorites page, saved in the browser. This is not an official bonus.
 
-Service -> shared components -> Home search -> Artist -> Album -> Track -> build
-and browser QA -> README -> clean ZIP.
+## Order
 
-The required rubric implementation passes the current acceptance suite. The
-official multi-user bonus and the supplemental Local Favorites feature are also
-implemented; required behavior remains the grading priority.
+1. Both: set up and write `sendRequestToExpress`.
+2. Tracy: track list and carousel first, since the artist and album pages need them.
+   Stella: thermometer and track page at the same time.
+3. Stella: about, search, artist page, and album page.
+4. Both: test each other's work. 

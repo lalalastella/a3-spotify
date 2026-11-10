@@ -22,13 +22,30 @@ export class ArtistPageComponent implements OnInit {
   constructor(private route: ActivatedRoute, private spotifyService:SpotifyService, private favoritesService:FavoritesService) { }
 
   ngOnInit() {
-    this.artistId = this.route.snapshot.paramMap.get('id');
-    this.spotifyService.getArtist(this.artistId).then((artist) => {
+    // Reload whenever the artist id in the URL changes.
+    this.route.paramMap.subscribe((params) => {
+      this.artistId = params.get('id');
+      this.loadArtist();
+    });
+  }
+
+  private loadArtist() {
+    // Clear the old artist before loading the new one.
+    this.artist = undefined;
+    this.topTracks = undefined;
+    this.albums = undefined;
+    const requestedId = this.artistId;
+    this.spotifyService.getArtist(requestedId).then((artist) => {
+      if(requestedId !== this.artistId) return;
       this.artist = artist;
       this.isSaved = this.favoritesService.isFavorite(artist);
     });
-    this.spotifyService.getTopTracksForArtist(this.artistId).then((tracks) => this.topTracks = tracks);
-    this.spotifyService.getAlbumsForArtist(this.artistId).then((albums) => this.albums = albums);
+    this.spotifyService.getTopTracksForArtist(requestedId).then((tracks) => {
+      if(requestedId === this.artistId) this.topTracks = tracks;
+    });
+    this.spotifyService.getAlbumsForArtist(requestedId).then((albums) => {
+      if(requestedId === this.artistId) this.albums = albums;
+    });
   }
 
   toggleFavorite() {
