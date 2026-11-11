@@ -10,7 +10,7 @@
 - 3/3 Artist page
 - 1.5/1.5 Album page
 - 0.5/0.5 Track page
-- +1 Bonus: multiple users (see question 5)
+- +1 Bonus: multiple users (see question 5) & Favoriate
 
 We ran everything against the Canvas dummy_webserver and saved screenshots in
 the "screenshots" folder:
@@ -57,7 +57,7 @@ Other:
 
 We also used AI tools. Stella used OpenAI Codex while planning and
 debugging her code. Tracy used Claude Code to learn the code related to the
-assignment and debugging.
+assignment and debugging. We asked questions like "....(copy paste the code) Why does this not show the correct feature (explain the details of the features we want)? What's the reason? How should we improve?"
 
 4. What classmates or other individuals did you consult as part of this assignment? What did you discuss?
 
@@ -91,6 +91,11 @@ in one shared tokens.json file. We changed our "webserver" folder so each
 browser gets its own login session. Stella tested it with her Spotify Premium
 account.
 
+extra_credit.mp4 shows it working: two Spotify accounts are logged in at the
+same time, one in a normal window and one in a private window, and each window
+shows its own profile. After one of them logs out, the other is still logged
+in and can still search.
+
 To try it:
 1. Copy webserver/client_secret.example.json to webserver/client_secret.json
    and fill in your Spotify app's client id and secret. The app's redirect URI
@@ -108,7 +113,7 @@ in your browser.
 
 6. Is there anything special we need to know in order to run your code?
 
-To grade with the Canvas dummy server, which needs no login:
+To work with the Canvas dummy server, which needs no login:
 1. In the dummy_webserver folder, run npm install, then npm start. It runs at
    http://127.0.0.1:8888.
 2. In this project's "client" folder, run npm install, then ng serve.

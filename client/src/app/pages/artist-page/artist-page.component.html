@@ -4,7 +4,8 @@
 		<h1 class="artist-title">{{ artist.name }}</h1>
 
 		<div class="artist-stats">
-			<p>{{ artist.followersStr }} followers</p>
+			<!-- Spotify may leave out followers, so only show them when present -->
+			@if(artist.followers != null) { <p>{{ artist.followersStr }} followers</p> }
 			@if(artist.popularity) { <app-thermometer [popularity]="artist.popularity"></app-thermometer> }
 		</div>
 
